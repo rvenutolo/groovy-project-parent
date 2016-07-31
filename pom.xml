@@ -73,6 +73,8 @@
     </dependencyManagement>
 
     <build>
+        <sourceDirectory>${project.basedir}/src/main/groovy</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/src/test/groovy</testSourceDirectory>
         <pluginManagement>
             <plugins>
                 <plugin>
