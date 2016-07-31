@@ -47,6 +47,7 @@
         <maven.compiler.source>1.6</maven.compiler.source>
         <maven.compiler.target>1.6</maven.compiler.target>
         <!-- plugin versions -->
+        <animal.sniffer.plugin.version>1.15</animal.sniffer.plugin.version>
         <antrun.plugin.version>1.8</antrun.plugin.version>
         <assembly.plugin.version>2.6</assembly.plugin.version>
         <buildplan.plugin.version>1.2</buildplan.plugin.version>
@@ -77,6 +78,9 @@
         <spock.version>1.0-groovy-2.4</spock.version>
         <!-- my properties -->
         <groovy.project.resources.version>0.1.0-SNAPSHOT</groovy.project.resources.version>
+        <animal.sniffer.signature.groupId>org.codehaus.mojo.signature</animal.sniffer.signature.groupId>
+        <animal.sniffer.signature.artifactId>java16</animal.sniffer.signature.artifactId>
+        <animal.sniffer.signature.version>1.1</animal.sniffer.signature.version>
         <github.site.path>snapshot</github.site.path>
         <license.owner>Rick Venutolo</license.owner>
     </properties>
@@ -221,6 +225,11 @@
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>animal-sniffer-maven-plugin</artifactId>
+                    <version>${animal.sniffer.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
                     <artifactId>cobertura-maven-plugin</artifactId>
                     <version>${cobertura.plugin.version}</version>
                 </plugin>
@@ -249,6 +258,26 @@
                     <execution>
                         <goals>
                             <goal>process</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>animal-sniffer-maven-plugin</artifactId>
+                <configuration>
+                    <signature>
+                        <groupId>${animal.sniffer.signature.groupId}</groupId>
+                        <artifactId>${animal.sniffer.signature.artifactId}</artifactId>
+                        <version>${animal.sniffer.signature.version}</version>
+                    </signature>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>check-java-api</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>
