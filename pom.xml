@@ -26,6 +26,15 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <id>rvenutolo</id>
+            <email>rick@venutolo.org</email>
+            <name>Rick Venutolo</name>
+            <url>https://github.com/rvenutolo</url>
+        </developer>
+    </developers>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
