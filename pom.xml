@@ -20,12 +20,29 @@
 
     <properties>
         <groovy.version>2.4.7</groovy.version>
+        <spock.version>1.0-groovy-2.4</spock.version>
         <remote.resources.plugin.version>1.5</remote.resources.plugin.version>
         <license.plugin.version>2.11</license.plugin.version>
         <codenarc.plugin.version>0.22-1</codenarc.plugin.version>
         <codenarc.version>0.25.2</codenarc.version>
         <assembly.plugin.version>2.6</assembly.plugin.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-all</artifactId>
+                <version>${groovy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.spockframework</groupId>
+                <artifactId>spock-core</artifactId>
+                <version>${spock.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <pluginManagement>
