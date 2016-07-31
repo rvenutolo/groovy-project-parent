@@ -57,6 +57,7 @@
         <compiler.plugin.version>3.5.1</compiler.plugin.version>
         <dependency.plugin.version>2.10</dependency.plugin.version>
         <deploy.plugin.version>2.8.2</deploy.plugin.version>
+        <github.site.plugin.version>0.12</github.site.plugin.version>
         <install.plugin.version>2.5.2</install.plugin.version>
         <jar.plugin.version>3.0.2</jar.plugin.version>
         <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
@@ -65,6 +66,7 @@
         <release.plugin.version>2.5.3</release.plugin.version>
         <remote.resources.plugin.version>1.5</remote.resources.plugin.version>
         <resources.plugin.version>3.0.1</resources.plugin.version>
+        <site.plugin.version>3.5.1</site.plugin.version>
         <surefire.report.plugin.version>2.19.1</surefire.report.plugin.version>
         <versions.plugin.version>2.2</versions.plugin.version>
         <!-- dependency versions -->
@@ -109,6 +111,11 @@
         </testResources>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>com.github.github</groupId>
+                    <artifactId>site-maven-plugin</artifactId>
+                    <version>${github.site.plugin.version}</version>
+                </plugin>
                 <plugin>
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
@@ -183,6 +190,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>${resources.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${site.plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -294,6 +306,35 @@
                                 <descriptor>${project.build.directory}/maven-shared-archive-resources/assembly/test-javadoc-jar.xml</descriptor>
                             </descriptors>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <configuration>
+                    <!-- disable site deployment as github site-maven-plugin will handle it
+                    see: https://github.github.com/maven-plugins/site-plugin/phase.html -->
+                    <skipDeploy>true</skipDeploy>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <configuration>
+                    <!-- NOTE: oauth2token must have public_repo and user:email scopes -->
+                    <message>creating maven site for ${project.version}</message>
+                    <path>${github.site.path}</path>
+                    <!-- don't overwrite non maven site stuff in repo -->
+                    <merge>true</merge>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>github-site</id>
+                        <phase>site-deploy</phase>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
