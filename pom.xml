@@ -37,6 +37,39 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>2.11</version>
+                <configuration>
+                    <header>${project.build.directory}/maven-shared-archive-resources/license/license-header-template.txt</header>
+                    <mapping>
+                        <!-- Use /* instead of /**, which is the default for some reason. -->
+                        <java>SLASHSTAR_STYLE</java>
+                        <groovy>SLASHSTAR_STYLE</groovy>
+                    </mapping>
+                    <properties>
+                        <owner>Rick Venutolo</owner>
+                    </properties>
+                    <includes>
+                        <!-- When the plugin does matching, it uses the relative path of the file,
+                        e.g. pom.xml is 'pom.xml' and not '${project.basedir}/pom.xml'.
+                        So one cannot use '${project.basedir}/src/main/groovy/**'
+                        or '${project.build.sourceDirectory}/**'-->
+                        <include>src/main/groovy/**</include>
+                        <include>src/test/groovy/**</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>check-licenses</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
