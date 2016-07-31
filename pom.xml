@@ -298,6 +298,16 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <!-- TODO check this -->
+                    <useReleaseProfile>true</useReleaseProfile>
+                    <!-- TODO add distributionManagement>site element and remove 'goals' -->
+                    <goals>deploy site-deploy</goals>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>fr.jcgay.maven.plugins</groupId>
                 <artifactId>buildplan-maven-plugin</artifactId>
             </plugin>
