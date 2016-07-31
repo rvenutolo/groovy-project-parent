@@ -55,6 +55,7 @@
         <codenarc.plugin.version>0.22-1</codenarc.plugin.version>
         <codenarc.version>0.25.2</codenarc.version>
         <compiler.plugin.version>3.5.1</compiler.plugin.version>
+        <copy.rename.plugin.version>1.0.1</copy.rename.plugin.version>
         <dependency.plugin.version>2.10</dependency.plugin.version>
         <deploy.plugin.version>2.8.2</deploy.plugin.version>
         <github.site.plugin.version>0.12</github.site.plugin.version>
@@ -111,6 +112,11 @@
         </testResources>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>com.coderplus.maven.plugins</groupId>
+                    <artifactId>copy-rename-maven-plugin</artifactId>
+                    <version>${copy.rename.plugin.version}</version>
+                </plugin>
                 <plugin>
                     <groupId>com.github.github</groupId>
                     <artifactId>site-maven-plugin</artifactId>
@@ -305,6 +311,25 @@
                                 <descriptor>${project.build.directory}/maven-shared-archive-resources/assembly/javadoc-jar.xml</descriptor>
                                 <descriptor>${project.build.directory}/maven-shared-archive-resources/assembly/test-javadoc-jar.xml</descriptor>
                             </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.coderplus.maven.plugins</groupId>
+                <artifactId>copy-rename-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <!-- This copies the README.md file to the site dir and
+                        renames it to index.md for site generation. -->
+                        <id>copy-readme-to-index</id>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <sourceFile>${project.basedir}/README.md</sourceFile>
+                            <destinationFile>${project.basedir}/src/site/markdown/index.md</destinationFile>
                         </configuration>
                     </execution>
                 </executions>
