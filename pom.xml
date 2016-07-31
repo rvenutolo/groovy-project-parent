@@ -242,6 +242,27 @@
                 </executions>
             </plugin>
             <plugin>
+                <!-- Using this instead of groovydoc-maven-plugin because
+                I prefer the groovydoc output by gplus (mostly links config). -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-doc</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>${project.build.directory}/maven-shared-archive-resources/assembly/javadoc-jar.xml</descriptor>
+                                <descriptor>${project.build.directory}/maven-shared-archive-resources/assembly/test-javadoc-jar.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
                 <configuration>
@@ -291,27 +312,6 @@
                         <goals>
                             <goal>codenarc</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <!-- Using this instead of groovydoc-maven-plugin because
-                I prefer the groovydoc output by gplus (mostly links config). -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-doc</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <configuration>
-                            <descriptors>
-                                <descriptor>${project.build.directory}/maven-shared-archive-resources/assembly/javadoc-jar.xml</descriptor>
-                                <descriptor>${project.build.directory}/maven-shared-archive-resources/assembly/test-javadoc-jar.xml</descriptor>
-                            </descriptors>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
