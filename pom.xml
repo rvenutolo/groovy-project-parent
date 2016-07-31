@@ -52,6 +52,8 @@
         <codenarc.plugin.version>0.22-1</codenarc.plugin.version>
         <codenarc.version>0.25.2</codenarc.version>
         <assembly.plugin.version>2.6</assembly.plugin.version>
+        <!-- path for non-release version of maven site -->
+        <github.site.path>snapshot</github.site.path>
     </properties>
 
     <dependencyManagement>
