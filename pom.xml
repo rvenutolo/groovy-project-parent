@@ -19,6 +19,10 @@
     <inceptionYear>2016</inceptionYear>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
         <groovy.version>2.4.7</groovy.version>
         <spock.version>1.0-groovy-2.4</spock.version>
         <remote.resources.plugin.version>1.5</remote.resources.plugin.version>
