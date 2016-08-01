@@ -62,6 +62,7 @@
         <enforcer.plugin.version>1.4.1</enforcer.plugin.version>
         <extra.enforcer.rules.version>1.0-beta-4</extra.enforcer.rules.version>
         <github.site.plugin.version>0.12</github.site.plugin.version>
+        <gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
         <install.plugin.version>2.5.2</install.plugin.version>
         <jar.plugin.version>3.0.2</jar.plugin.version>
         <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
@@ -95,6 +96,7 @@
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy-all</artifactId>
                 <version>${groovy.version}</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.spockframework</groupId>
@@ -104,6 +106,13 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+        </dependency>
+    </dependencies>
 
     <build>
         <sourceDirectory>${project.basedir}/src/main/groovy</sourceDirectory>
@@ -240,6 +249,11 @@
                     <version>${surefire.report.plugin.version}</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.codehaus.gmavenplus</groupId>
+                    <artifactId>gmavenplus-plugin</artifactId>
+                    <version>${gmavenplus.plugin.version}</version>
+                </plugin>
+                <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>animal-sniffer-maven-plugin</artifactId>
                     <version>${animal.sniffer.plugin.version}</version>
@@ -262,6 +276,66 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+                <configuration>
+                    <!-- groovydoc titles/footer/header -->
+                    <windowTitle>${project.groupId}:${project.artifactId}:${project.version}</windowTitle>
+                    <docTitle>${project.groupId}:${project.artifactId}:${project.version}</docTitle>
+                    <footer>${project.groupId}:${project.artifactId}:${project.version}</footer>
+                    <header>${project.groupId}:${project.artifactId}:${project.version}</header>
+                    <!-- the scope to generate groovydoc for -->
+                    <scope>package</scope>
+                    <!-- these are package links in groovydoc, ex: java.lang.String links to Java API -->
+                    <links>
+                        <link>
+                            <packages>java,javax,org.ietf.jgss,org.omg,org.w3c,org.xml</packages>
+                            <href>http://docs.oracle.com/javase/6/docs/api/</href>
+                        </link>
+                        <link>
+                            <packages>org.codehaus.groovy,groovy</packages>
+                            <href>http://docs.groovy-lang.org/latest/html/api/</href>
+                        </link>
+                        <link>
+                            <packages>spock</packages>
+                            <href>http://spockframework.github.io/spock/javadoc/1.0/</href>
+                        </link>
+                    </links>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>compile-groovy</id>
+                        <goals>
+                            <goal>addSources</goal>
+                            <goal>addTestSources</goal>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>package-groovydoc</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>groovydoc</goal>
+                            <goal>testGroovydoc</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>site-groovydoc</id>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>groovydoc</goal>
+                            <goal>testGroovydoc</goal>
+                        </goals>
+                        <configuration>
+                            <!-- set output directories to those used by javadoc plugin for site build -->
+                            <groovydocOutputDirectory>${project.reporting.outputDirectory}/apidocs</groovydocOutputDirectory>
+                            <testGroovydocOutputDirectory>${project.reporting.outputDirectory}/testapidocs</testGroovydocOutputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-remote-resources-plugin</artifactId>
