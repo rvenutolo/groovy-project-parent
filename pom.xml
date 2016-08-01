@@ -37,7 +37,7 @@
 
     <prerequisites>
         <!-- buildplan-maven-plugin requires 3.0.4+ -->
-        <maven>3.0.4</maven>
+        <maven>${maven.minimum.version}</maven>
     </prerequisites>
 
     <properties>
@@ -59,6 +59,8 @@
         <copy.rename.plugin.version>1.0.1</copy.rename.plugin.version>
         <dependency.plugin.version>2.10</dependency.plugin.version>
         <deploy.plugin.version>2.8.2</deploy.plugin.version>
+        <enforcer.plugin.version>1.4.1</enforcer.plugin.version>
+        <extra.enforcer.rules.version>1.0-beta-4</extra.enforcer.rules.version>
         <github.site.plugin.version>0.12</github.site.plugin.version>
         <install.plugin.version>2.5.2</install.plugin.version>
         <jar.plugin.version>3.0.2</jar.plugin.version>
@@ -81,6 +83,8 @@
         <animal.sniffer.signature.groupId>org.codehaus.mojo.signature</animal.sniffer.signature.groupId>
         <animal.sniffer.signature.artifactId>java16</animal.sniffer.signature.artifactId>
         <animal.sniffer.signature.version>1.1</animal.sniffer.signature.version>
+        <maven.minimum.version>3.0.4</maven.minimum.version>
+        <java.minimum.version>1.6</java.minimum.version>
         <github.site.path>snapshot</github.site.path>
         <license.owner>Rick Venutolo</license.owner>
     </properties>
@@ -167,6 +171,18 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>${deploy.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${enforcer.plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>extra-enforcer-rules</artifactId>
+                            <version>${extra.enforcer.rules.version}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -258,6 +274,45 @@
                     <execution>
                         <goals>
                             <goal>process</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <configuration>
+                    <rules>
+                        <requirePrerequisite>
+                            <!-- buildplan-maven-plugin requires 3.0.4+ -->
+                            <mavenVersion>[${maven.minimum.version},)</mavenVersion>
+                        </requirePrerequisite>
+                        <requireMavenVersion>
+                            <!-- buildplan-maven-plugin requires 3.0.4+ -->
+                            <version>[${maven.minimum.version},)</version>
+                        </requireMavenVersion>
+                        <requireJavaVersion>
+                            <!-- groovy 2.4.0+ requires 1.6+ -->
+                            <version>[${java.minimum.version},)</version>
+                        </requireJavaVersion>
+                        <dependencyConvergence>
+                            <uniqueVersions>false</uniqueVersions>
+                        </dependencyConvergence>
+                        <banCircularDependencies/>
+                        <banDuplicateClasses/>
+                        <requirePluginVersions/>
+                        <requireReleaseDeps>
+                            <onlyWhenRelease>true</onlyWhenRelease>
+                        </requireReleaseDeps>
+                    </rules>
+                    <fail>true</fail>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>enforce</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>enforce</goal>
                         </goals>
                     </execution>
                 </executions>
