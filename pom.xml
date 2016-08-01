@@ -352,6 +352,14 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <id>generate-resources-process</id>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>pre-site-process</id>
+                        <phase>pre-site</phase>
                         <goals>
                             <goal>process</goal>
                         </goals>
@@ -541,6 +549,18 @@
                 <groupId>com.coderplus.maven.plugins</groupId>
                 <artifactId>copy-rename-maven-plugin</artifactId>
                 <executions>
+                    <execution>
+                        <!-- This copies the site.xml file to the site dir. -->
+                        <id>copy-site-xml</id>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <sourceFile>${project.build.directory}/maven-shared-archive-resources/site/site.xml</sourceFile>
+                            <destinationFile>${project.basedir}/src/site/site.xml</destinationFile>
+                        </configuration>
+                    </execution>
                     <execution>
                         <!-- This copies the README.md file to the site dir and
                         renames it to index.md for site generation. -->
