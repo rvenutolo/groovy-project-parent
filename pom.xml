@@ -63,6 +63,7 @@
         <extra.enforcer.rules.version>1.0-beta-4</extra.enforcer.rules.version>
         <github.site.plugin.version>0.12</github.site.plugin.version>
         <gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
+        <gpg.plugin.version>1.6</gpg.plugin.version>
         <install.plugin.version>2.5.2</install.plugin.version>
         <jar.plugin.version>3.0.2</jar.plugin.version>
         <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
@@ -192,6 +193,11 @@
                             <version>${extra.enforcer.rules.version}</version>
                         </dependency>
                     </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>${gpg.plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -679,5 +685,41 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <properties>
+                <github.site.path>${project.version}</github.site.path>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <!--<distributionManagement>-->
+            <!--<snapshotRepository>-->
+            <!--<id>oss</id>-->
+            <!--<url>https://oss.sonatype.org/content/repositories/snapshots/</url>-->
+            <!--</snapshotRepository>-->
+            <!--<repository>-->
+            <!--<id>oss</id>-->
+            <!--<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
+            <!--</repository>-->
+            <!--</distributionManagement>-->
+        </profile>
+    </profiles>
 
 </project>
