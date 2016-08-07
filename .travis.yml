@@ -19,4 +19,4 @@ before_script:
   - ./mvnw -B -e -V buildplan:list-phase versions:display-dependency-updates versions:display-plugin-updates versions:display-property-updates
 
 script:
-  - ./mvnw -B -e verify -Dassembly.skipAssembly=true
+  - ./mvnw -B -e verify -Dassembly.skipAssembly=true -Dsort.skip=true
