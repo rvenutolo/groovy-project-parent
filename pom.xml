@@ -289,10 +289,6 @@
                     <lineSeparator>\n</lineSeparator>
                     <nrOfIndentSpace>4</nrOfIndentSpace>
                     <predefinedSortOrder>recommended_2008_06</predefinedSortOrder>
-                    <!--<verifyFail>Stop</verifyFail>-->
-                    <!--<sortPlugins>groupId,artifactId</sortPlugins>-->
-                    <!--<sortProperties>true</sortProperties>-->
-                    <!--<sortDependencies>scope</sortDependencies>-->
                 </configuration>
                 <executions>
                     <execution>
