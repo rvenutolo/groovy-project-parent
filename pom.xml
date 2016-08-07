@@ -13,10 +13,14 @@
     <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>GroovyProjectResources</name>
+    <name>GroovyProjectParent</name>
     <description>Parent POM for my Groovy projects.</description>
     <url>https://github.com/rvenutolo/groovy-project-parent</url>
     <inceptionYear>2016</inceptionYear>
+
+    <modules>
+        <module>with-build</module>
+    </modules>
 
     <licenses>
         <license>
@@ -97,7 +101,6 @@
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy-all</artifactId>
                 <version>${groovy.version}</version>
-                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.spockframework</groupId>
@@ -107,13 +110,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-        </dependency>
-    </dependencies>
 
     <build>
         <sourceDirectory>${project.basedir}/src/main/groovy</sourceDirectory>
@@ -136,16 +132,87 @@
                     <groupId>com.coderplus.maven.plugins</groupId>
                     <artifactId>copy-rename-maven-plugin</artifactId>
                     <version>${copy.rename.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <!-- This copies the site.xml file to the site dir. -->
+                            <id>copy-site-xml</id>
+                            <phase>pre-site</phase>
+                            <goals>
+                                <goal>copy</goal>
+                            </goals>
+                            <configuration>
+                                <sourceFile>${project.build.directory}/maven-shared-archive-resources/site/site.xml</sourceFile>
+                                <destinationFile>${project.basedir}/src/site/site.xml</destinationFile>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <!-- This copies the README.md file to the site dir and
+                            renames it to index.md for site generation. -->
+                            <id>copy-readme-to-index</id>
+                            <phase>pre-site</phase>
+                            <goals>
+                                <goal>copy</goal>
+                            </goals>
+                            <configuration>
+                                <sourceFile>${project.basedir}/README.md</sourceFile>
+                                <destinationFile>${project.basedir}/src/site/markdown/index.md</destinationFile>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>com.github.github</groupId>
                     <artifactId>site-maven-plugin</artifactId>
                     <version>${github.site.plugin.version}</version>
+                    <configuration>
+                        <!-- NOTE: oauth2token must have public_repo and user:email scopes -->
+                        <message>creating maven site for ${project.version}</message>
+                        <path>${github.site.path}</path>
+                        <!-- don't overwrite non maven site stuff in repo -->
+                        <merge>true</merge>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>github-site</id>
+                            <phase>site-deploy</phase>
+                            <goals>
+                                <goal>site</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
                     <version>${license.plugin.version}</version>
+                    <configuration>
+                        <header>${project.build.directory}/maven-shared-archive-resources/license/license-header-template.txt</header>
+                        <mapping>
+                            <!-- Use /* instead of /**, which is the default for some reason. -->
+                            <java>SLASHSTAR_STYLE</java>
+                            <groovy>SLASHSTAR_STYLE</groovy>
+                        </mapping>
+                        <properties>
+                            <owner>${license.owner}</owner>
+                        </properties>
+                        <includes>
+                            <!-- When the plugin does matching, it uses the relative path of the file,
+                            e.g. pom.xml is 'pom.xml' and not '${project.basedir}/pom.xml'.
+                            So one cannot use '${project.basedir}/src/main/groovy/**'
+                            or '${project.build.sourceDirectory}/**'-->
+                            <include>src/main/groovy/**</include>
+                            <include>src/test/groovy/**</include>
+                        </includes>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>check-licenses</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>fr.jcgay.maven.plugins</groupId>
@@ -158,9 +225,26 @@
                     <version>${antrun.plugin.version}</version>
                 </plugin>
                 <plugin>
+                    <!-- Using this instead of groovydoc-maven-plugin because
+                    I prefer the groovydoc output by gplus (mostly links config). -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
                     <version>${assembly.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>attach-doc</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                            <configuration>
+                                <descriptors>
+                                    <descriptor>${project.build.directory}/maven-shared-archive-resources/assembly/javadoc-jar.xml</descriptor>
+                                    <descriptor>${project.build.directory}/maven-shared-archive-resources/assembly/test-javadoc-jar.xml</descriptor>
+                                </descriptors>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -176,6 +260,21 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>${dependency.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>check-dependencies</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>analyze-only</goal>
+                                <goal>analyze-duplicate</goal>
+                                <goal>analyze-dep-mgt</goal>
+                            </goals>
+                            <configuration>
+                                <failOnWarning>true</failOnWarning>
+                                <failBuild>true</failBuild>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -193,6 +292,41 @@
                             <version>${extra.enforcer.rules.version}</version>
                         </dependency>
                     </dependencies>
+                    <configuration>
+                        <rules>
+                            <requirePrerequisite>
+                                <!-- buildplan-maven-plugin requires 3.0.4+ -->
+                                <mavenVersion>[${maven.minimum.version},)</mavenVersion>
+                            </requirePrerequisite>
+                            <requireMavenVersion>
+                                <!-- buildplan-maven-plugin requires 3.0.4+ -->
+                                <version>[${maven.minimum.version},)</version>
+                            </requireMavenVersion>
+                            <requireJavaVersion>
+                                <!-- groovy 2.4.0+ requires 1.6+ -->
+                                <version>[${java.minimum.version},)</version>
+                            </requireJavaVersion>
+                            <dependencyConvergence>
+                                <uniqueVersions>false</uniqueVersions>
+                            </dependencyConvergence>
+                            <banCircularDependencies/>
+                            <banDuplicateClasses/>
+                            <requirePluginVersions/>
+                            <requireReleaseDeps>
+                                <onlyWhenRelease>true</onlyWhenRelease>
+                            </requireReleaseDeps>
+                        </rules>
+                        <fail>true</fail>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>enforce</id>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -223,11 +357,37 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
                     <version>${release.plugin.version}</version>
+                    <configuration>
+                        <!-- TODO check this -->
+                        <useReleaseProfile>true</useReleaseProfile>
+                        <!-- TODO add distributionManagement>site element and remove 'goals' -->
+                        <goals>deploy site-deploy</goals>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-remote-resources-plugin</artifactId>
                     <version>${remote.resources.plugin.version}</version>
+                    <configuration>
+                        <resourceBundles>
+                            <resourceBundle>org.venutolo:groovy-project-resources:${groovy.project.resources.version}</resourceBundle>
+                        </resourceBundles>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>generate-resources-process</id>
+                            <goals>
+                                <goal>process</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>pre-site-process</id>
+                            <phase>pre-site</phase>
+                            <goals>
+                                <goal>process</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -238,16 +398,41 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
                     <version>${site.plugin.version}</version>
+                    <configuration>
+                        <!-- disable site deployment as github site-maven-plugin will handle it
+                        see: https://github.github.com/maven-plugins/site-plugin/phase.html -->
+                        <skipDeploy>true</skipDeploy>
+
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>${source.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                                <goal>test-jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${surefire.plugin.version}</version>
+                    <configuration>
+                        <includes>
+                            <include>**/Test*.java</include>
+                            <include>**/*Test.java</include>
+                            <include>**/*TestCase.java</include>
+                            <include>**/*Spec.class</include>
+                            <include>**/*Specification.class</include>
+                        </includes>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -258,11 +443,83 @@
                     <groupId>org.codehaus.gmavenplus</groupId>
                     <artifactId>gmavenplus-plugin</artifactId>
                     <version>${gmavenplus.plugin.version}</version>
+                    <configuration>
+                        <!-- groovydoc titles/footer/header -->
+                        <windowTitle>${project.groupId}:${project.artifactId}:${project.version}</windowTitle>
+                        <docTitle>${project.groupId}:${project.artifactId}:${project.version}</docTitle>
+                        <footer>${project.groupId}:${project.artifactId}:${project.version}</footer>
+                        <header>${project.groupId}:${project.artifactId}:${project.version}</header>
+                        <!-- the scope to generate groovydoc for -->
+                        <scope>package</scope>
+                        <!-- these are package links in groovydoc, ex: java.lang.String links to Java API -->
+                        <links>
+                            <link>
+                                <packages>java,javax,org.ietf.jgss,org.omg,org.w3c,org.xml</packages>
+                                <href>http://docs.oracle.com/javase/6/docs/api/</href>
+                            </link>
+                            <link>
+                                <packages>org.codehaus.groovy,groovy</packages>
+                                <href>http://docs.groovy-lang.org/latest/html/api/</href>
+                            </link>
+                            <link>
+                                <packages>spock</packages>
+                                <href>http://spockframework.github.io/spock/javadoc/1.0/</href>
+                            </link>
+                        </links>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>compile-groovy</id>
+                            <goals>
+                                <goal>addSources</goal>
+                                <goal>addTestSources</goal>
+                                <goal>compile</goal>
+                                <goal>testCompile</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>package-groovydoc</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>groovydoc</goal>
+                                <goal>testGroovydoc</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>site-groovydoc</id>
+                            <phase>site</phase>
+                            <goals>
+                                <goal>groovydoc</goal>
+                                <goal>testGroovydoc</goal>
+                            </goals>
+                            <configuration>
+                                <!-- set output directories to those used by javadoc plugin for site build -->
+                                <groovydocOutputDirectory>${project.reporting.outputDirectory}/apidocs</groovydocOutputDirectory>
+                                <testGroovydocOutputDirectory>${project.reporting.outputDirectory}/testapidocs</testGroovydocOutputDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>animal-sniffer-maven-plugin</artifactId>
                     <version>${animal.sniffer.plugin.version}</version>
+                    <configuration>
+                        <signature>
+                            <groupId>${animal.sniffer.signature.groupId}</groupId>
+                            <artifactId>${animal.sniffer.signature.artifactId}</artifactId>
+                            <version>${animal.sniffer.signature.version}</version>
+                        </signature>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>check-java-api</id>
+                            <phase>process-classes</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -273,6 +530,23 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>codenarc-maven-plugin</artifactId>
                     <version>${codenarc.plugin.version}</version>
+                    <configuration>
+                        <codeNarcVersion>${codenarc.version}</codeNarcVersion>
+                        <rulesetfiles>file:${project.build.directory}/maven-shared-archive-resources/codenarc/codenarc.groovy</rulesetfiles>
+                        <groovyVersion>${groovy.version}</groovyVersion>
+                        <maxPriority1Violations>0</maxPriority1Violations>
+                        <maxPriority2Violations>0</maxPriority2Violations>
+                        <maxPriority3Violations>0</maxPriority3Violations>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>codenarc</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>codenarc</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -281,430 +555,7 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.gmavenplus</groupId>
-                <artifactId>gmavenplus-plugin</artifactId>
-                <configuration>
-                    <!-- groovydoc titles/footer/header -->
-                    <windowTitle>${project.groupId}:${project.artifactId}:${project.version}</windowTitle>
-                    <docTitle>${project.groupId}:${project.artifactId}:${project.version}</docTitle>
-                    <footer>${project.groupId}:${project.artifactId}:${project.version}</footer>
-                    <header>${project.groupId}:${project.artifactId}:${project.version}</header>
-                    <!-- the scope to generate groovydoc for -->
-                    <scope>package</scope>
-                    <!-- these are package links in groovydoc, ex: java.lang.String links to Java API -->
-                    <links>
-                        <link>
-                            <packages>java,javax,org.ietf.jgss,org.omg,org.w3c,org.xml</packages>
-                            <href>http://docs.oracle.com/javase/6/docs/api/</href>
-                        </link>
-                        <link>
-                            <packages>org.codehaus.groovy,groovy</packages>
-                            <href>http://docs.groovy-lang.org/latest/html/api/</href>
-                        </link>
-                        <link>
-                            <packages>spock</packages>
-                            <href>http://spockframework.github.io/spock/javadoc/1.0/</href>
-                        </link>
-                    </links>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>compile-groovy</id>
-                        <goals>
-                            <goal>addSources</goal>
-                            <goal>addTestSources</goal>
-                            <goal>compile</goal>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>package-groovydoc</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>groovydoc</goal>
-                            <goal>testGroovydoc</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>site-groovydoc</id>
-                        <phase>site</phase>
-                        <goals>
-                            <goal>groovydoc</goal>
-                            <goal>testGroovydoc</goal>
-                        </goals>
-                        <configuration>
-                            <!-- set output directories to those used by javadoc plugin for site build -->
-                            <groovydocOutputDirectory>${project.reporting.outputDirectory}/apidocs</groovydocOutputDirectory>
-                            <testGroovydocOutputDirectory>${project.reporting.outputDirectory}/testapidocs</testGroovydocOutputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-remote-resources-plugin</artifactId>
-                <configuration>
-                    <resourceBundles>
-                        <resourceBundle>org.venutolo:groovy-project-resources:${groovy.project.resources.version}</resourceBundle>
-                    </resourceBundles>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>generate-resources-process</id>
-                        <goals>
-                            <goal>process</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>pre-site-process</id>
-                        <phase>pre-site</phase>
-                        <goals>
-                            <goal>process</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <configuration>
-                    <rules>
-                        <requirePrerequisite>
-                            <!-- buildplan-maven-plugin requires 3.0.4+ -->
-                            <mavenVersion>[${maven.minimum.version},)</mavenVersion>
-                        </requirePrerequisite>
-                        <requireMavenVersion>
-                            <!-- buildplan-maven-plugin requires 3.0.4+ -->
-                            <version>[${maven.minimum.version},)</version>
-                        </requireMavenVersion>
-                        <requireJavaVersion>
-                            <!-- groovy 2.4.0+ requires 1.6+ -->
-                            <version>[${java.minimum.version},)</version>
-                        </requireJavaVersion>
-                        <dependencyConvergence>
-                            <uniqueVersions>false</uniqueVersions>
-                        </dependencyConvergence>
-                        <banCircularDependencies/>
-                        <banDuplicateClasses/>
-                        <requirePluginVersions/>
-                        <requireReleaseDeps>
-                            <onlyWhenRelease>true</onlyWhenRelease>
-                        </requireReleaseDeps>
-                    </rules>
-                    <fail>true</fail>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>enforce</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>animal-sniffer-maven-plugin</artifactId>
-                <configuration>
-                    <signature>
-                        <groupId>${animal.sniffer.signature.groupId}</groupId>
-                        <artifactId>${animal.sniffer.signature.artifactId}</artifactId>
-                        <version>${animal.sniffer.signature.version}</version>
-                    </signature>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>check-java-api</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <includes>
-                        <include>**/Test*.java</include>
-                        <include>**/*Test.java</include>
-                        <include>**/*TestCase.java</include>
-                        <include>**/*Spec.class</include>
-                        <include>**/*Specification.class</include>
-                    </includes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                            <goal>test-jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <!-- Using this instead of groovydoc-maven-plugin because
-                I prefer the groovydoc output by gplus (mostly links config). -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-doc</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <configuration>
-                            <descriptors>
-                                <descriptor>${project.build.directory}/maven-shared-archive-resources/assembly/javadoc-jar.xml</descriptor>
-                                <descriptor>${project.build.directory}/maven-shared-archive-resources/assembly/test-javadoc-jar.xml</descriptor>
-                            </descriptors>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.mycila</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <configuration>
-                    <header>${project.build.directory}/maven-shared-archive-resources/license/license-header-template.txt</header>
-                    <mapping>
-                        <!-- Use /* instead of /**, which is the default for some reason. -->
-                        <java>SLASHSTAR_STYLE</java>
-                        <groovy>SLASHSTAR_STYLE</groovy>
-                    </mapping>
-                    <properties>
-                        <owner>${license.owner}</owner>
-                    </properties>
-                    <includes>
-                        <!-- When the plugin does matching, it uses the relative path of the file,
-                        e.g. pom.xml is 'pom.xml' and not '${project.basedir}/pom.xml'.
-                        So one cannot use '${project.basedir}/src/main/groovy/**'
-                        or '${project.build.sourceDirectory}/**'-->
-                        <include>src/main/groovy/**</include>
-                        <include>src/test/groovy/**</include>
-                    </includes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>check-licenses</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>codenarc-maven-plugin</artifactId>
-                <configuration>
-                    <codeNarcVersion>${codenarc.version}</codeNarcVersion>
-                    <rulesetfiles>file:${project.build.directory}/maven-shared-archive-resources/codenarc/codenarc.groovy</rulesetfiles>
-                    <groovyVersion>${groovy.version}</groovyVersion>
-                    <maxPriority1Violations>0</maxPriority1Violations>
-                    <maxPriority2Violations>0</maxPriority2Violations>
-                    <maxPriority3Violations>0</maxPriority3Violations>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>codenarc</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>codenarc</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>check-dependencies</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>analyze-only</goal>
-                            <goal>analyze-duplicate</goal>
-                            <goal>analyze-dep-mgt</goal>
-                        </goals>
-                        <configuration>
-                            <failOnWarning>true</failOnWarning>
-                            <failBuild>true</failBuild>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.coderplus.maven.plugins</groupId>
-                <artifactId>copy-rename-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <!-- This copies the site.xml file to the site dir. -->
-                        <id>copy-site-xml</id>
-                        <phase>pre-site</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <sourceFile>${project.build.directory}/maven-shared-archive-resources/site/site.xml</sourceFile>
-                            <destinationFile>${project.basedir}/src/site/site.xml</destinationFile>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <!-- This copies the README.md file to the site dir and
-                        renames it to index.md for site generation. -->
-                        <id>copy-readme-to-index</id>
-                        <phase>pre-site</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <sourceFile>${project.basedir}/README.md</sourceFile>
-                            <destinationFile>${project.basedir}/src/site/markdown/index.md</destinationFile>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <configuration>
-                    <!-- disable site deployment as github site-maven-plugin will handle it
-                    see: https://github.github.com/maven-plugins/site-plugin/phase.html -->
-                    <skipDeploy>true</skipDeploy>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <configuration>
-                    <!-- NOTE: oauth2token must have public_repo and user:email scopes -->
-                    <message>creating maven site for ${project.version}</message>
-                    <path>${github.site.path}</path>
-                    <!-- don't overwrite non maven site stuff in repo -->
-                    <merge>true</merge>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>github-site</id>
-                        <phase>site-deploy</phase>
-                        <goals>
-                            <goal>site</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <!-- TODO check this -->
-                    <useReleaseProfile>true</useReleaseProfile>
-                    <!-- TODO add distributionManagement>site element and remove 'goals' -->
-                    <goals>deploy site-deploy</goals>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>fr.jcgay.maven.plugins</groupId>
-                <artifactId>buildplan-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
     </build>
-
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>index</report>
-                            <report>summary</report>
-                            <report>license</report>
-                            <report>dependency-info</report>
-                            <report>dependency-management</report>
-                            <report>dependencies</report>
-                            <report>dependency-convergence</report>
-                            <report>plugins</report>
-                            <report>plugin-management</report>
-                            <report>scm</report>
-                            <report>cim</report>
-                            <report>issue-tracking</report>
-                            <report>project-team</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <!-- skip javadoc generation as groovydoc is generated elsewhere -->
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <configuration>
-                    <linkXRef>false</linkXRef>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>cobertura</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>codenarc-maven-plugin</artifactId>
-                <configuration>
-                    <codeNarcVersion>${codenarc.version}</codeNarcVersion>
-                    <rulesetfiles>file:${project.build.directory}/maven-shared-archive-resources/codenarc/codenarc.groovy</rulesetfiles>
-                    <groovyVersion>${groovy.version}</groovyVersion>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>dependency-updates-report</report>
-                            <report>plugin-updates-report</report>
-                            <report>property-updates-report</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-        </plugins>
-    </reporting>
 
     <profiles>
         <profile>
