@@ -94,6 +94,7 @@
         <remote.resources.plugin.version>1.5</remote.resources.plugin.version>
         <resources.plugin.version>3.0.1</resources.plugin.version>
         <site.plugin.version>3.5.1</site.plugin.version>
+        <sortpom.plugin.version>2.5.0</sortpom.plugin.version>
         <source.plugin.version>3.0.1</source.plugin.version>
         <surefire.plugin.version>2.19.1</surefire.plugin.version>
         <surefire.report.plugin.version>2.19.1</surefire.report.plugin.version>
@@ -288,7 +289,7 @@
             <plugin>
                 <groupId>com.github.ekryd.sortpom</groupId>
                 <artifactId>sortpom-maven-plugin</artifactId>
-                <version>2.5.0</version>
+                <version>${sortpom.plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
