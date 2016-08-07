@@ -22,6 +22,10 @@
         <maven>${maven.minimum.version}</maven>
     </prerequisites>
 
+    <modules>
+        <module>groovy-project-parent-with-build</module>
+    </modules>
+
     <scm>
         <connection>scm:git:git@github.com:rvenutolo/groovy-project-parent.git</connection>
         <developerConnection>scm:git:git@github.com:rvenutolo/groovy-project-parent.git</developerConnection>

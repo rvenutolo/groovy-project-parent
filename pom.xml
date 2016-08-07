@@ -37,7 +37,6 @@
     <modules>
         <module>groovy-project-resources</module>
         <module>groovy-project-parent-with-config</module>
-        <module>groovy-project-parent-with-build</module>
     </modules>
 
     <scm>
