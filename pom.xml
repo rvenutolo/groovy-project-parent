@@ -116,18 +116,6 @@
     <build>
         <sourceDirectory>${project.basedir}/src/main/groovy</sourceDirectory>
         <testSourceDirectory>${project.basedir}/src/test/groovy</testSourceDirectory>
-        <resources>
-            <resource>
-                <directory>${project.basedir}/src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-        <testResources>
-            <testResource>
-                <directory>${project.basedir}/src/test/resources</directory>
-                <filtering>true</filtering>
-            </testResource>
-        </testResources>
         <pluginManagement>
             <plugins>
                 <plugin>
