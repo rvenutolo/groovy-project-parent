@@ -28,8 +28,8 @@
     <developers>
         <developer>
             <id>rvenutolo</id>
-            <email>rick@venutolo.org</email>
             <name>Rick Venutolo</name>
+            <email>rick@venutolo.org</email>
             <url>https://github.com/rvenutolo</url>
         </developer>
     </developers>
@@ -46,9 +46,9 @@
     </modules>
 
     <scm>
-        <url>https://github.com/rvenutolo/groovy-project-parent</url>
         <connection>scm:git:git@github.com:rvenutolo/groovy-project-parent.git</connection>
         <developerConnection>scm:git:git@github.com:rvenutolo/groovy-project-parent.git</developerConnection>
+        <url>https://github.com/rvenutolo/groovy-project-parent</url>
     </scm>
 
     <issueManagement>

@@ -28,9 +28,9 @@
     </prerequisites>
 
     <scm>
-        <url>https://github.com/rvenutolo/groovy-project-parent</url>
         <connection>scm:git:git@github.com:rvenutolo/groovy-project-parent.git</connection>
         <developerConnection>scm:git:git@github.com:rvenutolo/groovy-project-parent.git</developerConnection>
+        <url>https://github.com/rvenutolo/groovy-project-parent</url>
     </scm>
 
     <dependencies>
