@@ -35,9 +35,9 @@
     </prerequisites>
 
     <modules>
-        <module>resources</module>
-        <module>with-config</module>
-        <module>with-build</module>
+        <module>groovy-project-resources</module>
+        <module>groovy-project-parent-with-config</module>
+        <module>groovy-project-parent-with-build</module>
     </modules>
 
     <scm>
