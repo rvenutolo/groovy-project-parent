@@ -23,6 +23,10 @@
     <url>https://github.com/rvenutolo/groovy-project-parent</url>
     <inceptionYear>2016</inceptionYear>
 
+    <prerequisites>
+        <maven>${maven.minimum.version}</maven>
+    </prerequisites>
+
     <build>
         <plugins>
             <plugin>

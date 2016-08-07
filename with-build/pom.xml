@@ -25,7 +25,6 @@
     <inceptionYear>2016</inceptionYear>
 
     <prerequisites>
-        <!-- buildplan-maven-plugin requires 3.0.4+ -->
         <maven>${maven.minimum.version}</maven>
     </prerequisites>
 

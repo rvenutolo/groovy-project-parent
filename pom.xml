@@ -17,13 +17,6 @@
     <description>Parent POM for my Groovy projects.</description>
     <url>https://github.com/rvenutolo/groovy-project-parent</url>
     <inceptionYear>2016</inceptionYear>
-
-    <modules>
-        <module>resources</module>
-        <module>with-config</module>
-        <module>with-build</module>
-    </modules>
-
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -45,6 +38,12 @@
         <!-- buildplan-maven-plugin requires 3.0.4+ -->
         <maven>${maven.minimum.version}</maven>
     </prerequisites>
+
+    <modules>
+        <module>resources</module>
+        <module>with-config</module>
+        <module>with-build</module>
+    </modules>
 
     <properties>
         <!-- maven properties -->
