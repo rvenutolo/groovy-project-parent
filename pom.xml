@@ -19,6 +19,7 @@
     <inceptionYear>2016</inceptionYear>
 
     <modules>
+        <module>resources</module>
         <module>with-config</module>
         <module>with-build</module>
     </modules>
