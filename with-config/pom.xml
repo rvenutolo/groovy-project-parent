@@ -211,7 +211,6 @@
                         </rules>
                         <fail>true</fail>
                     </configuration>
-                    <!-- todo check that extra-enforcer-rules dependency propagates -->
                     <executions>
                         <execution>
                             <id>enforce</id>
