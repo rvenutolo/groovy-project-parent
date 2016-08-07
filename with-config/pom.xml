@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<project
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -51,10 +46,10 @@
                         <execution>
                             <!-- This copies the site.xml file to the site dir. -->
                             <id>copy-site-xml</id>
-                            <phase>pre-site</phase>
                             <goals>
                                 <goal>copy</goal>
                             </goals>
+                            <phase>pre-site</phase>
                             <configuration>
                                 <sourceFile>${project.build.directory}/maven-shared-archive-resources/site/site.xml</sourceFile>
                                 <destinationFile>${project.basedir}/src/site/site.xml</destinationFile>
@@ -64,10 +59,10 @@
                             <!-- This copies the README.md file to the site dir and
                             renames it to index.md for site generation. -->
                             <id>copy-readme-to-index</id>
-                            <phase>pre-site</phase>
                             <goals>
                                 <goal>copy</goal>
                             </goals>
+                            <phase>pre-site</phase>
                             <configuration>
                                 <sourceFile>${project.basedir}/README.md</sourceFile>
                                 <destinationFile>${project.basedir}/src/site/markdown/index.md</destinationFile>
@@ -78,15 +73,6 @@
                 <plugin>
                     <groupId>com.github.github</groupId>
                     <artifactId>site-maven-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>github-site</id>
-                            <phase>site-deploy</phase>
-                            <goals>
-                                <goal>site</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                     <configuration>
                         <!-- NOTE: oauth2token must have public_repo and user:email scopes -->
                         <message>creating maven site for ${project.version}</message>
@@ -94,19 +80,19 @@
                         <!-- don't overwrite non maven site stuff in repo -->
                         <merge>true</merge>
                     </configuration>
+                    <executions>
+                        <execution>
+                            <id>github-site</id>
+                            <goals>
+                                <goal>site</goal>
+                            </goals>
+                            <phase>site-deploy</phase>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>check-licenses</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                     <configuration>
                         <header>${project.build.directory}/maven-shared-archive-resources/license/license-header-template.txt</header>
                         <mapping>
@@ -126,6 +112,15 @@
                             <include>src/test/groovy/**</include>
                         </includes>
                     </configuration>
+                    <executions>
+                        <execution>
+                            <id>check-licenses</id>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                            <phase>verify</phase>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>fr.jcgay.maven.plugins</groupId>
@@ -143,10 +138,10 @@
                     <executions>
                         <execution>
                             <id>attach-doc</id>
-                            <phase>package</phase>
                             <goals>
                                 <goal>single</goal>
                             </goals>
+                            <phase>package</phase>
                             <configuration>
                                 <descriptors>
                                     <descriptor>${project.build.directory}/maven-shared-archive-resources/assembly/javadoc-jar.xml</descriptor>
@@ -170,12 +165,12 @@
                     <executions>
                         <execution>
                             <id>check-dependencies</id>
-                            <phase>verify</phase>
                             <goals>
                                 <goal>analyze-only</goal>
                                 <goal>analyze-duplicate</goal>
                                 <goal>analyze-dep-mgt</goal>
                             </goals>
+                            <phase>verify</phase>
                             <configuration>
                                 <failOnWarning>true</failOnWarning>
                                 <failBuild>true</failBuild>
@@ -190,16 +185,6 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <!-- todo check that extra-enforcer-rules dependency propagates -->
-                    <executions>
-                        <execution>
-                            <id>enforce</id>
-                            <phase>validate</phase>
-                            <goals>
-                                <goal>enforce</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                     <configuration>
                         <rules>
                             <requirePrerequisite>
@@ -217,15 +202,25 @@
                             <dependencyConvergence>
                                 <uniqueVersions>false</uniqueVersions>
                             </dependencyConvergence>
-                            <banCircularDependencies/>
-                            <banDuplicateClasses/>
-                            <requirePluginVersions/>
+                            <banCircularDependencies></banCircularDependencies>
+                            <banDuplicateClasses></banDuplicateClasses>
+                            <requirePluginVersions></requirePluginVersions>
                             <requireReleaseDeps>
                                 <onlyWhenRelease>true</onlyWhenRelease>
                             </requireReleaseDeps>
                         </rules>
                         <fail>true</fail>
                     </configuration>
+                    <!-- todo check that extra-enforcer-rules dependency propagates -->
+                    <executions>
+                        <execution>
+                            <id>enforce</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <phase>validate</phase>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -260,6 +255,11 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-remote-resources-plugin</artifactId>
+                    <configuration>
+                        <resourceBundles>
+                            <resourceBundle>org.venutolo:groovy-project-resources:${groovy.project.resources.version}</resourceBundle>
+                        </resourceBundles>
+                    </configuration>
                     <executions>
                         <execution>
                             <id>generate-resources-process</id>
@@ -269,17 +269,12 @@
                         </execution>
                         <execution>
                             <id>pre-site-process</id>
-                            <phase>pre-site</phase>
                             <goals>
                                 <goal>process</goal>
                             </goals>
+                            <phase>pre-site</phase>
                         </execution>
                     </executions>
-                    <configuration>
-                        <resourceBundles>
-                            <resourceBundle>org.venutolo:groovy-project-resources:${groovy.project.resources.version}</resourceBundle>
-                        </resourceBundles>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -300,11 +295,11 @@
                     <executions>
                         <execution>
                             <id>attach-sources</id>
-                            <phase>package</phase>
                             <goals>
                                 <goal>jar-no-fork</goal>
                                 <goal>test-jar-no-fork</goal>
                             </goals>
+                            <phase>package</phase>
                         </execution>
                     </executions>
                 </plugin>
@@ -328,38 +323,6 @@
                 <plugin>
                     <groupId>org.codehaus.gmavenplus</groupId>
                     <artifactId>gmavenplus-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>compile-groovy</id>
-                            <goals>
-                                <goal>addSources</goal>
-                                <goal>addTestSources</goal>
-                                <goal>compile</goal>
-                                <goal>testCompile</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>package-groovydoc</id>
-                            <phase>prepare-package</phase>
-                            <goals>
-                                <goal>groovydoc</goal>
-                                <goal>testGroovydoc</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>site-groovydoc</id>
-                            <phase>site</phase>
-                            <goals>
-                                <goal>groovydoc</goal>
-                                <goal>testGroovydoc</goal>
-                            </goals>
-                            <configuration>
-                                <!-- set output directories to those used by javadoc plugin for site build -->
-                                <groovydocOutputDirectory>${project.reporting.outputDirectory}/apidocs</groovydocOutputDirectory>
-                                <testGroovydocOutputDirectory>${project.reporting.outputDirectory}/testapidocs</testGroovydocOutputDirectory>
-                            </configuration>
-                        </execution>
-                    </executions>
                     <configuration>
                         <!-- groovydoc titles/footer/header -->
                         <windowTitle>${project.groupId}:${project.artifactId}:${project.version}</windowTitle>
@@ -384,19 +347,42 @@
                             </link>
                         </links>
                     </configuration>
+                    <executions>
+                        <execution>
+                            <id>compile-groovy</id>
+                            <goals>
+                                <goal>addSources</goal>
+                                <goal>addTestSources</goal>
+                                <goal>compile</goal>
+                                <goal>testCompile</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>package-groovydoc</id>
+                            <goals>
+                                <goal>groovydoc</goal>
+                                <goal>testGroovydoc</goal>
+                            </goals>
+                            <phase>prepare-package</phase>
+                        </execution>
+                        <execution>
+                            <id>site-groovydoc</id>
+                            <goals>
+                                <goal>groovydoc</goal>
+                                <goal>testGroovydoc</goal>
+                            </goals>
+                            <phase>site</phase>
+                            <configuration>
+                                <!-- set output directories to those used by javadoc plugin for site build -->
+                                <groovydocOutputDirectory>${project.reporting.outputDirectory}/apidocs</groovydocOutputDirectory>
+                                <testGroovydocOutputDirectory>${project.reporting.outputDirectory}/testapidocs</testGroovydocOutputDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>animal-sniffer-maven-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>check-java-api</id>
-                            <phase>process-classes</phase>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                     <configuration>
                         <signature>
                             <groupId>${animal.sniffer.signature.groupId}</groupId>
@@ -404,6 +390,15 @@
                             <version>${animal.sniffer.signature.version}</version>
                         </signature>
                     </configuration>
+                    <executions>
+                        <execution>
+                            <id>check-java-api</id>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                            <phase>process-classes</phase>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -412,15 +407,6 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>codenarc-maven-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>codenarc</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>codenarc</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                     <configuration>
                         <codeNarcVersion>${codenarc.version}</codeNarcVersion>
                         <rulesetfiles>file:${project.build.directory}/maven-shared-archive-resources/codenarc/codenarc.groovy</rulesetfiles>
@@ -429,6 +415,15 @@
                         <maxPriority2Violations>0</maxPriority2Violations>
                         <maxPriority3Violations>0</maxPriority3Violations>
                     </configuration>
+                    <executions>
+                        <execution>
+                            <id>codenarc</id>
+                            <goals>
+                                <goal>codenarc</goal>
+                            </goals>
+                            <phase>verify</phase>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>

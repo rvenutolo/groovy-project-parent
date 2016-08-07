@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<project
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -130,8 +125,6 @@
     </dependencyManagement>
 
     <build>
-        <sourceDirectory>${project.basedir}/src/main/groovy</sourceDirectory>
-        <testSourceDirectory>${project.basedir}/src/test/groovy</testSourceDirectory>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -290,6 +283,17 @@
                 <groupId>com.github.ekryd.sortpom</groupId>
                 <artifactId>sortpom-maven-plugin</artifactId>
                 <version>${sortpom.plugin.version}</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <keepBlankLines>true</keepBlankLines>
+                    <lineSeparator>\n</lineSeparator>
+                    <nrOfIndentSpace>4</nrOfIndentSpace>
+                    <predefinedSortOrder>recommended_2008_06</predefinedSortOrder>
+                    <!--<verifyFail>Stop</verifyFail>-->
+                    <!--<sortPlugins>groupId,artifactId</sortPlugins>-->
+                    <!--<sortProperties>true</sortProperties>-->
+                    <!--<sortDependencies>scope</sortDependencies>-->
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -298,21 +302,10 @@
                         <phase>verify</phase>
                     </execution>
                 </executions>
-                <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <expandEmptyElements>false</expandEmptyElements>
-                    <keepBlankLines>true</keepBlankLines>
-                    <lineSeparator>\n</lineSeparator>
-                    <nrOfIndentSpace>4</nrOfIndentSpace>
-                    <predefinedSortOrder>recommended_2008_06</predefinedSortOrder>
-
-                    <!--<verifyFail>Stop</verifyFail>-->
-                    <!--<sortPlugins>groupId,artifactId</sortPlugins>-->
-                    <!--<sortProperties>true</sortProperties>-->
-                    <!--<sortDependencies>scope</sortDependencies>-->
-                </configuration>
             </plugin>
         </plugins>
+        <sourceDirectory>${project.basedir}/src/main/groovy</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/src/test/groovy</testSourceDirectory>
     </build>
 
     <profiles>
@@ -329,10 +322,10 @@
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
-                                <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <phase>verify</phase>
                             </execution>
                         </executions>
                     </plugin>
