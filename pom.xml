@@ -133,6 +133,11 @@
                     <version>${copy.rename.plugin.version}</version>
                 </plugin>
                 <plugin>
+                    <groupId>com.github.ekryd.sortpom</groupId>
+                    <artifactId>sortpom-maven-plugin</artifactId>
+                    <version>${sortpom.plugin.version}</version>
+                </plugin>
+                <plugin>
                     <groupId>com.github.github</groupId>
                     <artifactId>site-maven-plugin</artifactId>
                     <version>${github.site.plugin.version}</version>
@@ -282,7 +287,6 @@
             <plugin>
                 <groupId>com.github.ekryd.sortpom</groupId>
                 <artifactId>sortpom-maven-plugin</artifactId>
-                <version>${sortpom.plugin.version}</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <keepBlankLines>true</keepBlankLines>
