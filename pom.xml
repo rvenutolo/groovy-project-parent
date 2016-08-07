@@ -45,6 +45,22 @@
         <module>with-build</module>
     </modules>
 
+    <scm>
+        <url>https://github.com/rvenutolo/groovy-project-parent</url>
+        <connection>scm:git:git@github.com:rvenutolo/groovy-project-parent.git</connection>
+        <developerConnection>scm:git:git@github.com:rvenutolo/groovy-project-parent.git</developerConnection>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/rvenutolo/groovy-project-parent/issues</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>Travis CI</system>
+        <url>https://travis-ci.org/rvenutolo/groovy-project-parent</url>
+    </ciManagement>
+
     <properties>
         <!-- maven properties -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
