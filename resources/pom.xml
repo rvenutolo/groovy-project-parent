@@ -38,12 +38,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-remote-resources-plugin</artifactId>
-                <configuration>
-                    <includes>
-                        <!-- default includes are **/*.txt **/*.vm -->
-                        <include>**/*</include>
-                    </includes>
-                </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -51,6 +45,12 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <includes>
+                        <!-- default includes are **/*.txt **/*.vm -->
+                        <include>**/*</include>
+                    </includes>
+                </configuration>
             </plugin>
         </plugins>
     </build>

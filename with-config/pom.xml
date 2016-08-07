@@ -78,13 +78,6 @@
                 <plugin>
                     <groupId>com.github.github</groupId>
                     <artifactId>site-maven-plugin</artifactId>
-                    <configuration>
-                        <!-- NOTE: oauth2token must have public_repo and user:email scopes -->
-                        <message>creating maven site for ${project.version}</message>
-                        <path>${github.site.path}</path>
-                        <!-- don't overwrite non maven site stuff in repo -->
-                        <merge>true</merge>
-                    </configuration>
                     <executions>
                         <execution>
                             <id>github-site</id>
@@ -94,10 +87,26 @@
                             </goals>
                         </execution>
                     </executions>
+                    <configuration>
+                        <!-- NOTE: oauth2token must have public_repo and user:email scopes -->
+                        <message>creating maven site for ${project.version}</message>
+                        <path>${github.site.path}</path>
+                        <!-- don't overwrite non maven site stuff in repo -->
+                        <merge>true</merge>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>check-licenses</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                     <configuration>
                         <header>${project.build.directory}/maven-shared-archive-resources/license/license-header-template.txt</header>
                         <mapping>
@@ -117,15 +126,6 @@
                             <include>src/test/groovy/**</include>
                         </includes>
                     </configuration>
-                    <executions>
-                        <execution>
-                            <id>check-licenses</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>fr.jcgay.maven.plugins</groupId>
@@ -191,6 +191,15 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <!-- todo check that extra-enforcer-rules dependency propagates -->
+                    <executions>
+                        <execution>
+                            <id>enforce</id>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                     <configuration>
                         <rules>
                             <requirePrerequisite>
@@ -217,15 +226,6 @@
                         </rules>
                         <fail>true</fail>
                     </configuration>
-                    <executions>
-                        <execution>
-                            <id>enforce</id>
-                            <phase>validate</phase>
-                            <goals>
-                                <goal>enforce</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -260,11 +260,6 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-remote-resources-plugin</artifactId>
-                    <configuration>
-                        <resourceBundles>
-                            <resourceBundle>org.venutolo:groovy-project-resources:${groovy.project.resources.version}</resourceBundle>
-                        </resourceBundles>
-                    </configuration>
                     <executions>
                         <execution>
                             <id>generate-resources-process</id>
@@ -280,6 +275,11 @@
                             </goals>
                         </execution>
                     </executions>
+                    <configuration>
+                        <resourceBundles>
+                            <resourceBundle>org.venutolo:groovy-project-resources:${groovy.project.resources.version}</resourceBundle>
+                        </resourceBundles>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -328,30 +328,6 @@
                 <plugin>
                     <groupId>org.codehaus.gmavenplus</groupId>
                     <artifactId>gmavenplus-plugin</artifactId>
-                    <configuration>
-                        <!-- groovydoc titles/footer/header -->
-                        <windowTitle>${project.groupId}:${project.artifactId}:${project.version}</windowTitle>
-                        <docTitle>${project.groupId}:${project.artifactId}:${project.version}</docTitle>
-                        <footer>${project.groupId}:${project.artifactId}:${project.version}</footer>
-                        <header>${project.groupId}:${project.artifactId}:${project.version}</header>
-                        <!-- the scope to generate groovydoc for -->
-                        <scope>package</scope>
-                        <!-- these are package links in groovydoc, ex: java.lang.String links to Java API -->
-                        <links>
-                            <link>
-                                <packages>java,javax,org.ietf.jgss,org.omg,org.w3c,org.xml</packages>
-                                <href>http://docs.oracle.com/javase/6/docs/api/</href>
-                            </link>
-                            <link>
-                                <packages>org.codehaus.groovy,groovy</packages>
-                                <href>http://docs.groovy-lang.org/latest/html/api/</href>
-                            </link>
-                            <link>
-                                <packages>spock</packages>
-                                <href>http://spockframework.github.io/spock/javadoc/1.0/</href>
-                            </link>
-                        </links>
-                    </configuration>
                     <executions>
                         <execution>
                             <id>compile-groovy</id>
@@ -384,17 +360,34 @@
                             </configuration>
                         </execution>
                     </executions>
+                    <configuration>
+                        <!-- groovydoc titles/footer/header -->
+                        <windowTitle>${project.groupId}:${project.artifactId}:${project.version}</windowTitle>
+                        <docTitle>${project.groupId}:${project.artifactId}:${project.version}</docTitle>
+                        <footer>${project.groupId}:${project.artifactId}:${project.version}</footer>
+                        <header>${project.groupId}:${project.artifactId}:${project.version}</header>
+                        <!-- the scope to generate groovydoc for -->
+                        <scope>package</scope>
+                        <!-- these are package links in groovydoc, ex: java.lang.String links to Java API -->
+                        <links>
+                            <link>
+                                <packages>java,javax,org.ietf.jgss,org.omg,org.w3c,org.xml</packages>
+                                <href>http://docs.oracle.com/javase/6/docs/api/</href>
+                            </link>
+                            <link>
+                                <packages>org.codehaus.groovy,groovy</packages>
+                                <href>http://docs.groovy-lang.org/latest/html/api/</href>
+                            </link>
+                            <link>
+                                <packages>spock</packages>
+                                <href>http://spockframework.github.io/spock/javadoc/1.0/</href>
+                            </link>
+                        </links>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>animal-sniffer-maven-plugin</artifactId>
-                    <configuration>
-                        <signature>
-                            <groupId>${animal.sniffer.signature.groupId}</groupId>
-                            <artifactId>${animal.sniffer.signature.artifactId}</artifactId>
-                            <version>${animal.sniffer.signature.version}</version>
-                        </signature>
-                    </configuration>
                     <executions>
                         <execution>
                             <id>check-java-api</id>
@@ -404,6 +397,13 @@
                             </goals>
                         </execution>
                     </executions>
+                    <configuration>
+                        <signature>
+                            <groupId>${animal.sniffer.signature.groupId}</groupId>
+                            <artifactId>${animal.sniffer.signature.artifactId}</artifactId>
+                            <version>${animal.sniffer.signature.version}</version>
+                        </signature>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -412,14 +412,6 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>codenarc-maven-plugin</artifactId>
-                    <configuration>
-                        <codeNarcVersion>${codenarc.version}</codeNarcVersion>
-                        <rulesetfiles>file:${project.build.directory}/maven-shared-archive-resources/codenarc/codenarc.groovy</rulesetfiles>
-                        <groovyVersion>${groovy.version}</groovyVersion>
-                        <maxPriority1Violations>0</maxPriority1Violations>
-                        <maxPriority2Violations>0</maxPriority2Violations>
-                        <maxPriority3Violations>0</maxPriority3Violations>
-                    </configuration>
                     <executions>
                         <execution>
                             <id>codenarc</id>
@@ -429,6 +421,14 @@
                             </goals>
                         </execution>
                     </executions>
+                    <configuration>
+                        <codeNarcVersion>${codenarc.version}</codeNarcVersion>
+                        <rulesetfiles>file:${project.build.directory}/maven-shared-archive-resources/codenarc/codenarc.groovy</rulesetfiles>
+                        <groovyVersion>${groovy.version}</groovyVersion>
+                        <maxPriority1Violations>0</maxPriority1Violations>
+                        <maxPriority2Violations>0</maxPriority2Violations>
+                        <maxPriority3Violations>0</maxPriority3Violations>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
