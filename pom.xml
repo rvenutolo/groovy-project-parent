@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<project
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -94,6 +89,7 @@
         <remote.resources.plugin.version>1.5</remote.resources.plugin.version>
         <resources.plugin.version>3.0.1</resources.plugin.version>
         <site.plugin.version>3.5.1</site.plugin.version>
+        <sortpom.plugin.version>2.5.0</sortpom.plugin.version>
         <source.plugin.version>3.0.1</source.plugin.version>
         <surefire.plugin.version>2.19.1</surefire.plugin.version>
         <surefire.report.plugin.version>2.19.1</surefire.report.plugin.version>
@@ -129,14 +125,17 @@
     </dependencyManagement>
 
     <build>
-        <sourceDirectory>${project.basedir}/src/main/groovy</sourceDirectory>
-        <testSourceDirectory>${project.basedir}/src/test/groovy</testSourceDirectory>
         <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>com.coderplus.maven.plugins</groupId>
                     <artifactId>copy-rename-maven-plugin</artifactId>
                     <version>${copy.rename.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.ekryd.sortpom</groupId>
+                    <artifactId>sortpom-maven-plugin</artifactId>
+                    <version>${sortpom.plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>com.github.github</groupId>
@@ -284,6 +283,29 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>com.github.ekryd.sortpom</groupId>
+                <artifactId>sortpom-maven-plugin</artifactId>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <keepBlankLines>true</keepBlankLines>
+                    <lineSeparator>\n</lineSeparator>
+                    <nrOfIndentSpace>4</nrOfIndentSpace>
+                    <predefinedSortOrder>recommended_2008_06</predefinedSortOrder>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>sort</goal>
+                        </goals>
+                        <phase>verify</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <sourceDirectory>${project.basedir}/src/main/groovy</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/src/test/groovy</testSourceDirectory>
     </build>
 
     <profiles>
@@ -300,10 +322,10 @@
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
-                                <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <phase>verify</phase>
                             </execution>
                         </executions>
                     </plugin>
