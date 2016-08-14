@@ -13,7 +13,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>GroovyProjectParentWithBuild</name>
+    <name>groovy-project-parent-with-build</name>
     <description>Parent POM for Groovy projects that inherits from groovy-project-parent-with-config and includes build configuration.</description>
     <url>https://github.com/rvenutolo/groovy-project-parent</url>
     <inceptionYear>2016</inceptionYear>
