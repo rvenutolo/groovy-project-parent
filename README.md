@@ -23,4 +23,11 @@ A project contaning a few POMs intended as parent POMs for my Groovy projects, p
 * Provides a default build configuration with plugin configurations inherited from the parent.
 * Provides a default site build configuration.
 
-## [groovy-project-resources](groovy-project-resources/pom.xml)
+## [groovy-project-resources](groovy-project-resources/src/main/resources)
+
+* Child of `groovy-project-parent`.
+* Provides a resource bundle to be used by other projects via the [`maven-remote-resources-plugin`](https://maven.apache.org/plugins/maven-remote-resources-plugin/) plugin. This includes:
+ * [Assembly Descriptiors](https://maven.apache.org/plugins/maven-assembly-plugin/assembly.html) for creating Grooyvdoc/Javadoc jars.
+ * [CodeNarc](http://codenarc.sourceforge.net/) configuration files.
+ * [License Maven Plugin](http://code.mycila.com/license-maven-plugin/) header template.
+ * [Maven Site Plugin](https://maven.apache.org/plugins/maven-site-plugin/) site descriptor.
