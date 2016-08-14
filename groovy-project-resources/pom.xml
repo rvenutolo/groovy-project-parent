@@ -13,7 +13,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>GroovyProjectResources</name>
+    <name>groovy-project-resources</name>
     <description>A collection of shared resources for my Groovy projects.</description>
     <url>https://github.com/rvenutolo/groovy-project-parent</url>
     <inceptionYear>2016</inceptionYear>
