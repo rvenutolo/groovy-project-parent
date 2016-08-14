@@ -19,4 +19,8 @@ A project contaning a few POMs intended as parent POMs for my Groovy projects, p
 
 ## [groovy-project-parent-with-build](groovy-project-parent-with-config/groovy-project-parent-with-build/pom.xml)
 
+* Child of `groovy-project-parent-with-config`.
+* Provides a default build configuration with plugin configurations inherited from the parent.
+* Provides a default site build configuration.
+
 ## [groovy-project-resources](groovy-project-resources/pom.xml)
