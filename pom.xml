@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
 
     <name>GroovyProjectParent</name>
-    <description>Parent POM for my Groovy projects.</description>
+    <description>Parent POM for Groovy projects.</description>
     <url>https://github.com/rvenutolo/groovy-project-parent</url>
     <inceptionYear>2016</inceptionYear>
     <licenses>
