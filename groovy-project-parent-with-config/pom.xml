@@ -208,6 +208,7 @@
                             </dependencyConvergence>
                             <banCircularDependencies></banCircularDependencies>
                             <banDuplicateClasses></banDuplicateClasses>
+                            <banDistributionManagement></banDistributionManagement>
                             <requirePluginVersions></requirePluginVersions>
                             <requireReleaseDeps>
                                 <onlyWhenRelease>true</onlyWhenRelease>
