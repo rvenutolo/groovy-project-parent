@@ -191,29 +191,31 @@
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <configuration>
                         <rules>
-                            <requirePrerequisite>
-                                <!-- buildplan-maven-plugin requires 3.0.4+ -->
-                                <mavenVersion>[${maven.minimum.version},)</mavenVersion>
-                            </requirePrerequisite>
-                            <requireMavenVersion>
-                                <!-- buildplan-maven-plugin requires 3.0.4+ -->
-                                <version>[${maven.minimum.version},)</version>
-                            </requireMavenVersion>
+                            <!-- standard enforcer rules -->
+                            <banDistributionManagement></banDistributionManagement>
+                            <dependencyConvergence>
+                                <uniqueVersions>false</uniqueVersions>
+                            </dependencyConvergence>
                             <requireJavaVersion>
                                 <!-- groovy 2.4.0+ requires 1.6+ -->
                                 <version>[${java.minimum.version},)</version>
                             </requireJavaVersion>
-                            <dependencyConvergence>
-                                <uniqueVersions>false</uniqueVersions>
-                            </dependencyConvergence>
-                            <banCircularDependencies></banCircularDependencies>
-                            <banDuplicateClasses></banDuplicateClasses>
-                            <banDistributionManagement></banDistributionManagement>
+                            <requireMavenVersion>
+                                <!-- buildplan-maven-plugin requires 3.0.4+ -->
+                                <version>[${maven.minimum.version},)</version>
+                            </requireMavenVersion>
+                            <requireNoRepositories></requireNoRepositories>
                             <requirePluginVersions></requirePluginVersions>
+                            <requirePrerequisite>
+                                <!-- buildplan-maven-plugin requires 3.0.4+ -->
+                                <mavenVersion>[${maven.minimum.version},)</mavenVersion>
+                            </requirePrerequisite>
                             <requireReleaseDeps>
                                 <onlyWhenRelease>true</onlyWhenRelease>
                             </requireReleaseDeps>
-                            <requireNoRepositories></requireNoRepositories>
+                            <!-- extra enforcer rules -->
+                            <banCircularDependencies></banCircularDependencies>
+                            <banDuplicateClasses></banDuplicateClasses>
                         </rules>
                         <fail>true</fail>
                     </configuration>
