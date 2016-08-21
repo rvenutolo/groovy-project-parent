@@ -10,7 +10,10 @@ A project contaning a few POMs intended as parent POMs for my Groovy projects, p
 * Top-level parent POM.
 * Provides a number of properties that define plugin versions, Groovy and Spock versions, and some other configuration values.
 * Provides dependency and plugin versions in `dependencyManagement` and `pluginManagement` elements. All versions can be overriden in child POMs by overwriting a property value.
+* Provides a snapshot repository in `distributionManagement`.
 * Has one configured build plugin, [`sortpom-maven-plugin`](https://github.com/Ekryd/sortpom), to sort this POM and all inherting POMs.
+* Provides a `release` profile that adds a release repository to `distributionManagement` and adds a build plugin, [`maven-gpg-plugin`](https://maven.apache.org/plugins/maven-gpg-plugin/) to sign artifacts.
+* Provdes a `ci` profile for use in continuous integration to define the Sonatype OSSRH repository where snapshots of my projects may be found.
 
 ## [groovy-project-parent-with-config](https://github.com/rvenutolo/groovy-project-parent/blob/master/groovy-project-parent-with-config/pom.xml)
 
