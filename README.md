@@ -1,19 +1,19 @@
 # groovy-project-parent
 [![Build Status](https://travis-ci.org/rvenutolo/groovy-project-parent.svg?branch=master)](https://travis-ci.org/rvenutolo/groovy-project-parent)
 [![License](https://img.shields.io/hexpm/l/plug.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-[![Dependency Status](https://www.versioneye.com/user/projects/57b0ed67d6ffcd0042c1c3f6/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57b0ed67d6ffcd0042c1c3f6)
+[![Dependency Status](https://www.versioneye.com/user/projects/57b0ed67d6ffcd0042c1c3f6/badge.svg)](https://www.versioneye.com/user/projects/57b0ed67d6ffcd0042c1c3f6)
 
-A project contaning a few POMs intended as parent POMs for my Groovy projects, plus a resources bundle.
+A project containing a few POMs intended as parent POMs for my Groovy projects, plus a resources bundle.
 
 ## [groovy-project-parent](https://github.com/rvenutolo/groovy-project-parent/blob/master/pom.xml)
 
 * Top-level parent POM.
 * Provides a number of properties that define plugin versions, Groovy and Spock versions, and some other configuration values.
-* Provides dependency and plugin versions in `dependencyManagement` and `pluginManagement` elements. All versions can be overriden in child POMs by overwriting a property value.
+* Provides dependency and plugin versions in `dependencyManagement` and `pluginManagement` elements. All versions can be overridden in child POMs by overwriting a property value.
 * Provides a snapshot repository in `distributionManagement`.
-* Has one configured build plugin, [`sortpom-maven-plugin`](https://github.com/Ekryd/sortpom), to sort this POM and all inherting POMs.
+* Has one configured build plugin, [`sortpom-maven-plugin`](https://github.com/Ekryd/sortpom), to sort this POM and all inheriting POMs.
 * Provides a `release` profile that adds a release repository to `distributionManagement` and adds a build plugin, [`maven-gpg-plugin`](https://maven.apache.org/plugins/maven-gpg-plugin/) to sign artifacts.
-* Provdes a `ci` profile for use in continuous integration to define the Sonatype OSSRH repository where snapshots of my projects may be found.
+* Provides a `ci` profile for use in continuous integration to define the Sonatype OSSRH repository where snapshots of my projects may be found.
 
 ## [groovy-project-parent-with-config](https://github.com/rvenutolo/groovy-project-parent/blob/master/groovy-project-parent-with-config/pom.xml)
 
@@ -31,7 +31,7 @@ A project contaning a few POMs intended as parent POMs for my Groovy projects, p
 
 * Child of `groovy-project-parent`.
 * Provides a resource bundle to be used in other projects via the [`maven-remote-resources-plugin`](https://maven.apache.org/plugins/maven-remote-resources-plugin/) plugin. This includes:
- * [Assembly Descriptiors](https://maven.apache.org/plugins/maven-assembly-plugin/assembly.html) for creating Grooyvdoc/Javadoc jars.
+ * [Assembly Descriptors](https://maven.apache.org/plugins/maven-assembly-plugin/assembly.html) for creating Groovydoc/Javadoc jars.
  * [CodeNarc](http://codenarc.sourceforge.net/) configuration files.
  * [License Maven Plugin](http://code.mycila.com/license-maven-plugin/) header template.
  * [Maven Site Plugin](https://maven.apache.org/plugins/maven-site-plugin/) site descriptor.
