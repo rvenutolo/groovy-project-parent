@@ -210,9 +210,6 @@
                                 <!-- buildplan-maven-plugin requires 3.0.4+ -->
                                 <mavenVersion>[${maven.minimum.version},)</mavenVersion>
                             </requirePrerequisite>
-                            <requireReleaseDeps>
-                                <onlyWhenRelease>true</onlyWhenRelease>
-                            </requireReleaseDeps>
                             <!-- extra enforcer rules -->
                             <banCircularDependencies></banCircularDependencies>
                             <banDuplicateClasses></banDuplicateClasses>
@@ -439,5 +436,37 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-enforcer-plugin</artifactId>
+                            <configuration>
+                                <rules>
+                                    <requireReleaseDeps></requireReleaseDeps>
+                                    <requireReleaseVersion></requireReleaseVersion>
+                                </rules>
+                                <fail>true</fail>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <id>enforce</id>
+                                    <goals>
+                                        <goal>enforce</goal>
+                                    </goals>
+                                    <phase>validate</phase>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
