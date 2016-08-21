@@ -196,6 +196,7 @@
                             <dependencyConvergence>
                                 <uniqueVersions>false</uniqueVersions>
                             </dependencyConvergence>
+                            <reactorModuleConvergence></reactorModuleConvergence>
                             <requireJavaVersion>
                                 <!-- groovy 2.4.0+ requires 1.6+ -->
                                 <version>[${java.minimum.version},)</version>
