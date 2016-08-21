@@ -13,7 +13,7 @@ before_script:
   - export TZ=America/New_York
   # set maven alias
   - shopt -s expand_aliases
-  - alias mvn='./mvnw -B -e -P ci -Dsort.skip=true'
+  - alias mvn='./mvnw -B -e -Dsort.skip=true'
   # configure maven logging
   #  - include date time
   #  - disable download and artifact update checking logging to make log easier to read through
