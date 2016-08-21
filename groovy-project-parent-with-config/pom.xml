@@ -213,6 +213,7 @@
                             <requireReleaseDeps>
                                 <onlyWhenRelease>true</onlyWhenRelease>
                             </requireReleaseDeps>
+                            <requireNoRepositories></requireNoRepositories>
                         </rules>
                         <fail>true</fail>
                     </configuration>
