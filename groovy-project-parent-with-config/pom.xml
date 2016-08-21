@@ -204,7 +204,6 @@
                                 <!-- buildplan-maven-plugin requires 3.0.4+ -->
                                 <version>[${maven.minimum.version},)</version>
                             </requireMavenVersion>
-                            <requireNoRepositories></requireNoRepositories>
                             <requirePluginVersions></requirePluginVersions>
                             <requirePrerequisite>
                                 <!-- buildplan-maven-plugin requires 3.0.4+ -->
