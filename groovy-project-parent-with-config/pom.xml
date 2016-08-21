@@ -214,7 +214,6 @@
                             <banCircularDependencies></banCircularDependencies>
                             <banDuplicateClasses></banDuplicateClasses>
                         </rules>
-                        <fail>true</fail>
                     </configuration>
                     <executions>
                         <execution>
@@ -451,17 +450,7 @@
                                     <requireReleaseDeps></requireReleaseDeps>
                                     <requireReleaseVersion></requireReleaseVersion>
                                 </rules>
-                                <fail>true</fail>
                             </configuration>
-                            <executions>
-                                <execution>
-                                    <id>enforce</id>
-                                    <goals>
-                                        <goal>enforce</goal>
-                                    </goals>
-                                    <phase>validate</phase>
-                                </execution>
-                            </executions>
                         </plugin>
                     </plugins>
                 </pluginManagement>
