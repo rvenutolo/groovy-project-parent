@@ -36,9 +36,9 @@
 
 <p><a href="https://travis-ci.org/rvenutolo/groovy-project-parent"><img src="https://travis-ci.org/rvenutolo/groovy-project-parent.svg?branch=master" alt="Build Status"></a>
 <a href="https://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/hexpm/l/plug.svg" alt="License"></a>
-<a href="https://www.versioneye.com/user/projects/57b0ed67d6ffcd0042c1c3f6"><img src="https://www.versioneye.com/user/projects/57b0ed67d6ffcd0042c1c3f6/badge.svg?style=flat-square" alt="Dependency Status"></a></p>
+<a href="https://www.versioneye.com/user/projects/57b0ed67d6ffcd0042c1c3f6"><img src="https://www.versioneye.com/user/projects/57b0ed67d6ffcd0042c1c3f6/badge.svg" alt="Dependency Status"></a></p>
 
-<p>A project contaning a few POMs intended as parent POMs for my Groovy projects, plus a resources bundle.</p>
+<p>A project containing a few POMs intended as parent POMs for my Groovy projects, plus a resources bundle.</p>
 
 <h2>
 <a id="groovy-project-parent-1" class="anchor" href="#groovy-project-parent-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://github.com/rvenutolo/groovy-project-parent/blob/master/pom.xml">groovy-project-parent</a>
@@ -47,8 +47,10 @@
 <ul>
 <li>Top-level parent POM.</li>
 <li>Provides a number of properties that define plugin versions, Groovy and Spock versions, and some other configuration values.</li>
-<li>Provides dependency and plugin versions in <code>dependencyManagement</code> and <code>pluginManagement</code> elements. All versions can be overriden in child POMs by overwriting a property value.</li>
-<li>Has one configured build plugin, <a href="https://github.com/Ekryd/sortpom"><code>sortpom-maven-plugin</code></a>, to sort this POM and all inherting POMs.</li>
+<li>Provides dependency and plugin versions in <code>dependencyManagement</code> and <code>pluginManagement</code> elements. All versions can be overridden in child POMs by overwriting a property value.</li>
+<li>Provides a snapshot repository in <code>distributionManagement</code>.</li>
+<li>Has one configured build plugin, <a href="https://github.com/Ekryd/sortpom"><code>sortpom-maven-plugin</code></a>, to sort this POM and all inheriting POMs.</li>
+<li>Provides a <code>release</code> profile that adds a release repository to <code>distributionManagement</code> and adds a build plugin, <a href="https://maven.apache.org/plugins/maven-gpg-plugin/"><code>maven-gpg-plugin</code></a>, to sign artifacts.</li>
 </ul>
 
 <h2>
@@ -81,7 +83,7 @@
 
 <ul>
 <li>
-<a href="https://maven.apache.org/plugins/maven-assembly-plugin/assembly.html">Assembly Descriptiors</a> for creating Grooyvdoc/Javadoc jars.</li>
+<a href="https://maven.apache.org/plugins/maven-assembly-plugin/assembly.html">Assembly Descriptors</a> for creating Groovydoc/Javadoc jars.</li>
 <li>
 <a href="http://codenarc.sourceforge.net/">CodeNarc</a> configuration files.</li>
 <li>
