@@ -55,6 +55,13 @@
         <url>https://travis-ci.org/rvenutolo/groovy-project-parent</url>
     </ciManagement>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <properties>
         <!-- maven properties -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -310,6 +317,12 @@
     <profiles>
         <profile>
             <id>release</id>
+            <distributionManagement>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
             <properties>
                 <github.site.path>${project.version}</github.site.path>
             </properties>
@@ -330,16 +343,6 @@
                     </plugin>
                 </plugins>
             </build>
-            <!--<distributionManagement>-->
-            <!--<snapshotRepository>-->
-            <!--<id>oss</id>-->
-            <!--<url>https://oss.sonatype.org/content/repositories/snapshots/</url>-->
-            <!--</snapshotRepository>-->
-            <!--<repository>-->
-            <!--<id>oss</id>-->
-            <!--<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
-            <!--</repository>-->
-            <!--</distributionManagement>-->
         </profile>
     </profiles>
 
