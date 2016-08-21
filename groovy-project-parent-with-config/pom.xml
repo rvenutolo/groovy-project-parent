@@ -447,6 +447,7 @@
                             <artifactId>maven-enforcer-plugin</artifactId>
                             <configuration>
                                 <rules>
+                                    <requireNoRepositories></requireNoRepositories>
                                     <requireReleaseDeps></requireReleaseDeps>
                                     <requireReleaseVersion></requireReleaseVersion>
                                 </rules>
