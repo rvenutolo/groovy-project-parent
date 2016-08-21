@@ -8,7 +8,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>groovy-project-parent</name>
+    <name>${project.artifactId}</name>
     <description>Parent POM for Groovy projects.</description>
     <url>https://github.com/rvenutolo/groovy-project-parent</url>
     <inceptionYear>2016</inceptionYear>
