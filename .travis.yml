@@ -8,6 +8,13 @@ git:
 
 install: true
 
+env:
+  global:
+    # OSSRH_USERNAME
+    - secure: "jtGbBbsBw2qD5S+zeMhXzURobKfLZ58oznisjZQDdANqMejyzDWhJYmBRUPLbS8M74zn4wGnoVPCki6ig6AkUKVKx4vnROl717wFGaDhzL4VO4oxLhwIj3SYpGr3vygQyHTt5dTuCtrHearjjSHwlEk+OBQIZFwV7RR6DIse/VmJPUy+cvPVhbGTzLkCPbU3XxfS1TjmI4VpA69xK8fPNH1cqWF7+cbdWW+L5Ax5qAx9RY46kolUgIqpW2BsZrNdAQJCwRIqBHD9ZFPr7BgrwcXPSYXD6iopljVOp0ax3Jp8ML6rOAOG3aW4g1rSXBtDOqgfn5qtH6Hbry8r7fbBHFnN+s8OZXIQm1jol1RRHVTU+DVgj1visLCd7odajBWHMlQqFsj5YzVp1rFQtC/hYIa/JUxAkQaGN0SEWeACBiYZ/hF6vsHF8ChyKyfFQfvKFDLRRHRNH1OFrk4A3uWsl7h2xrEAkuy14WSw6TXZu9up9nRs5tdziN/KJW1dwqRQmA1uuLHm90AGvamBWs0FMn9lvw9e57kfd+CLfUKi7+qBPmT7SWMR2YfPRbxcg3a0xl5WdR4gVGpERUmymGbG3RiXTvgw5bdKQVOsoY75y4QM1C9iO8NKT+yojPWPAW90yBUwZSNW/gG7Ud46WwB2qyysxSWKtd4tPrRDAE/hN90="
+    # OSSRH_PASSWORD
+    - secure: "k8M9fUhlIKqgx5/zkn1YeRmS9Hq6hc0kKDTdJwCoO2DXJ1M6CYocEJfLITRxhyY9dcEHQw9tpLjgv6BmGXfXKVIDBwWpZgu5dK/K7/lxljsYjxGSYv0iqyvMRWwsL/HFRws4b3TrX9PzjF1pyiV8q8HFOCYfnuAUyJfAQfqhpI6BlUbma48niKHrGWdtbpnnqAour8+FG1gOgo7C+m1YfIXvS+bxjw1jYBFTM0+Uso9lfIGtu9K/LWuqmTWbz+eqEJ8Wsb0MI+ldItwhOp+8YsxChiGt3bGOmd47EuAT2KcfY9tChNOEQLgJqr/hznnRsZqqX9HVsNk4+M+nTfyrdlH0ocM314iVskaVsQ00zD3jLzW/gazNHEylCmyjotTiv2e6QjaDjdvcK4I1c8tjTFd0gdWDZ54LTpSrMXQ+6F2yQgs0OLRUpLKkQJeTtPMvPB89yo1VCD8mEOTDTXr0ywZYPuSeMNAtGhBdYZGafLsPB0GE8bSrGyMFFT4WRbEkFi05eExc+siVT63HWxpS7prWIrce7+kBb+tjp4SeMukKS3iqBwTt3+dc4vrk6jFRM9C3YJVqn2E2AQuBW3wecFm3JWmXMFlHPbmvH4ju4hkJO1vMgwKna4KQmuFCBid4ngMie3mgznpcMk8kVaoW44/UunShDSKAC81+d3FqZnQ="
+
 before_script:
   # set timezone so timestamps have time local to me
   - export TZ=America/New_York
@@ -23,3 +30,11 @@ before_script:
 
 script:
   - mvn verify
+
+after_success:
+  # deploy to ossrh
+  - |
+    if [[ ${TRAVIS_BRANCH} == 'master' ]] && [[ ${TRAVIS_PULL_REQUEST} == 'false' ]]; then
+        echo "<settings><servers><server><id>ossrh</id><username>\${env.OSSRH_USERNAME}</username><password>\${env.OSSRH_PASSWORD}</password></server></servers></settings>" > ~/settings.xml
+        mvn deploy --settings ~/settings.xml
+    fi
