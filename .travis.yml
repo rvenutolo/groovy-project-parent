@@ -42,7 +42,7 @@ after_success:
     fi
 # update versioneye
   - |
-    if [[ ${TRAVIS_BRANCH} == 'travis-versioneye' ]] && [[ ${TRAVIS_PULL_REQUEST} == 'false' ]]; then
+    if [[ ${TRAVIS_BRANCH} == 'master' ]] && [[ ${TRAVIS_PULL_REQUEST} == 'false' ]]; then
         mkdir -p src/main/resources
         mkdir -p groovy-project-resources/src/main/resources
         mkdir -p groovy-project-parent-with-config/src/main/resources
