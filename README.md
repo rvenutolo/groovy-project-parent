@@ -11,7 +11,7 @@ A project containing a few POMs intended as parent POMs for my Groovy projects, 
 * Provides dependency and plugin versions in `dependencyManagement` and `pluginManagement` elements. All versions can be overridden in child POMs by overwriting a property value.
 * Provides a snapshot repository in `distributionManagement`.
 * Has one configured build plugin, [`sortpom-maven-plugin`](https://github.com/Ekryd/sortpom), to sort this POM and all inheriting POMs.
-* Provides a `release` profile that adds a release repository to `distributionManagement` and adds a build plugin, [`maven-gpg-plugin`](https://maven.apache.org/plugins/maven-gpg-plugin/), to sign artifacts.
+* Provides a `release` profile that adds a release repository to `distributionManagement`.
 
 ## [groovy-project-parent-with-config](https://github.com/rvenutolo/groovy-project-parent/blob/master/groovy-project-parent-with-config/pom.xml) [![Dependency Status](https://www.versioneye.com/user/projects/57c33bcb86473900106adabe/badge.svg)](https://www.versioneye.com/user/projects/57c33bcb86473900106adabe)
 
