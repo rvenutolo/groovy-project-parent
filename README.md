@@ -1,7 +1,7 @@
 # groovy-project-parent
 [![Build Status](https://travis-ci.org/rvenutolo/groovy-project-parent.svg?branch=master)](https://travis-ci.org/rvenutolo/groovy-project-parent)
 [![License](https://img.shields.io/hexpm/l/plug.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-[![Dependency Status](https://www.versioneye.com/user/projects/57b0ed67d6ffcd0042c1c3f6/badge.svg)](https://www.versioneye.com/user/projects/57b0ed67d6ffcd0042c1c3f6)
+[![Dependency Status](https://www.versioneye.com/user/projects/57c33b3712b526000ed5f3be/badge.svg)](https://www.versioneye.com/user/projects/57c33b3712b526000ed5f3be)
 
 A project containing a few POMs intended as parent POMs for my Groovy projects, plus a resources bundle.
 
