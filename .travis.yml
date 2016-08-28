@@ -40,7 +40,7 @@ after_success:
       echo "<settings><servers><server><id>ossrh</id><username>\${env.OSSRH_USERNAME}</username><password>\${env.OSSRH_PASSWORD}</password></server></servers></settings>" > ~/settings.xml
       mvn deploy --settings ~/settings.xml
     fi
-# update versioneye
+  # update versioneye
   - |
     if [[ ${TRAVIS_BRANCH} == 'master' ]] && [[ ${TRAVIS_PULL_REQUEST} == 'false' ]]; then
       mkdir -p src/main/resources
