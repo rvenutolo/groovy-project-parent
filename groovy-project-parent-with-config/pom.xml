@@ -126,10 +126,6 @@
                     </executions>
                 </plugin>
                 <plugin>
-                    <groupId>fr.jcgay.maven.plugins</groupId>
-                    <artifactId>buildplan-maven-plugin</artifactId>
-                </plugin>
-                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-antrun-plugin</artifactId>
                 </plugin>
@@ -201,12 +197,10 @@
                                 <version>[${java.minimum.version},)</version>
                             </requireJavaVersion>
                             <requireMavenVersion>
-                                <!-- buildplan-maven-plugin requires 3.0.4+ -->
                                 <version>[${maven.minimum.version},)</version>
                             </requireMavenVersion>
                             <requirePluginVersions></requirePluginVersions>
                             <requirePrerequisite>
-                                <!-- buildplan-maven-plugin requires 3.0.4+ -->
                                 <mavenVersion>[${maven.minimum.version},)</mavenVersion>
                             </requirePrerequisite>
                             <!-- extra enforcer rules -->
