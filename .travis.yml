@@ -34,22 +34,12 @@ script:
   - mvn verify
 
 after_success:
-  # deploy to ossrh
+  # if master branch and not a pull request
+  #  - deploy to ossrh
+  #  - update versioneye
   - |
     if [[ ${TRAVIS_BRANCH} == 'master' ]] && [[ ${TRAVIS_PULL_REQUEST} == 'false' ]]; then
       echo "<settings><servers><server><id>ossrh</id><username>\${env.OSSRH_USERNAME}</username><password>\${env.OSSRH_PASSWORD}</password></server></servers></settings>" > ~/settings.xml
       mvn deploy --settings ~/settings.xml
-    fi
-  # update versioneye
-  - |
-    if [[ ${TRAVIS_BRANCH} == 'master' ]] && [[ ${TRAVIS_PULL_REQUEST} == 'false' ]]; then
-      mkdir -p src/main/resources
-      mkdir -p groovy-project-resources/src/main/resources
-      mkdir -p groovy-project-parent-with-config/src/main/resources
-      mkdir -p groovy-project-parent-with-config/groovy-project-parent-with-build/src/main/resources
-      echo 'project_id=57c33b3712b526000ed5f3be' > src/main/resources/versioneye.properties
-      echo 'project_id=57c33b6a8647390016589744' > groovy-project-resources/src/main/resources/versioneye.properties
-      echo 'project_id=57c33bcb86473900106adabe' > groovy-project-parent-with-config/src/main/resources/versioneye.properties
-      echo 'project_id=57c33bd7864739000ec94b20' > groovy-project-parent-with-config/groovy-project-parent-with-build/src/main/resources/versioneye.properties
-      mvn com.versioneye:versioneye-maven-plugin:update
+      mvn versioneye:update
     fi
