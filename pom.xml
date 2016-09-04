@@ -89,6 +89,7 @@
         <jar.plugin.version>3.0.2</jar.plugin.version>
         <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
         <license.plugin.version>3.0</license.plugin.version>
+        <nexus.staging.plugin.version>1.6.7</nexus.staging.plugin.version>
         <project.info.reports.plugin.version>2.9</project.info.reports.plugin.version>
         <release.plugin.version>2.5.3</release.plugin.version>
         <remote.resources.plugin.version>1.5</remote.resources.plugin.version>
@@ -292,6 +293,11 @@
                     <artifactId>versions-maven-plugin</artifactId>
                     <version>${versions.plugin.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>${nexus.staging.plugin.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -330,12 +336,6 @@
     <profiles>
         <profile>
             <id>release</id>
-            <distributionManagement>
-                <repository>
-                    <id>ossrh</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-                </repository>
-            </distributionManagement>
             <properties>
                 <github.site.path>${project.version}</github.site.path>
             </properties>
@@ -354,6 +354,16 @@
                                 <phase>verify</phase>
                             </execution>
                         </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <inherited>false</inherited>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
