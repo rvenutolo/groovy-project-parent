@@ -49,7 +49,6 @@
             <plugin>
                 <groupId>com.versioneye</groupId>
                 <artifactId>versioneye-maven-plugin</artifactId>
-                <inherited>false</inherited>
                 <configuration>
                     <projectId>57c33b6a8647390016589744</projectId>
                 </configuration>
