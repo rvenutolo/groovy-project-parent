@@ -89,6 +89,14 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>com.versioneye</groupId>
+                <artifactId>versioneye-maven-plugin</artifactId>
+                <inherited>false</inherited>
+                <configuration>
+                    <projectId>57c33bd7864739000ec94b20</projectId>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

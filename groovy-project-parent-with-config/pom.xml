@@ -427,6 +427,16 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>com.versioneye</groupId>
+                <artifactId>versioneye-maven-plugin</artifactId>
+                <inherited>false</inherited>
+                <configuration>
+                    <projectId>57c33bcb86473900106adabe</projectId>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
     <profiles>

@@ -98,6 +98,7 @@
         <source.plugin.version>3.0.1</source.plugin.version>
         <surefire.plugin.version>2.19.1</surefire.plugin.version>
         <surefire.report.plugin.version>2.19.1</surefire.report.plugin.version>
+        <versioneye.plugin.version>3.10.2</versioneye.plugin.version>
         <versions.plugin.version>2.3</versions.plugin.version>
         <!-- dependency versions -->
         <groovy.version>2.4.7</groovy.version>
@@ -151,6 +152,11 @@
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
                     <version>${license.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.versioneye</groupId>
+                    <artifactId>versioneye-maven-plugin</artifactId>
+                    <version>${versioneye.plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>fr.jcgay.maven.plugins</groupId>
@@ -307,6 +313,14 @@
                         <phase>verify</phase>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.versioneye</groupId>
+                <artifactId>versioneye-maven-plugin</artifactId>
+                <inherited>false</inherited>
+                <configuration>
+                    <projectId>57c33b3712b526000ed5f3be</projectId>
+                </configuration>
             </plugin>
         </plugins>
         <sourceDirectory>${project.basedir}/src/main/groovy</sourceDirectory>
