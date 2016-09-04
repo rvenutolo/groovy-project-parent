@@ -108,7 +108,7 @@
         <animal.sniffer.signature.groupId>org.codehaus.mojo.signature</animal.sniffer.signature.groupId>
         <animal.sniffer.signature.artifactId>java16</animal.sniffer.signature.artifactId>
         <animal.sniffer.signature.version>1.1</animal.sniffer.signature.version>
-        <maven.minimum.version>3.0.4</maven.minimum.version>
+        <maven.minimum.version>3.1</maven.minimum.version>
         <java.minimum.version>1.6</java.minimum.version>
         <github.site.path>snapshot</github.site.path>
         <license.owner>Rick Venutolo</license.owner>
