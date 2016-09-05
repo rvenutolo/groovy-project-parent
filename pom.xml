@@ -93,6 +93,7 @@
         <project.info.reports.plugin.version>2.9</project.info.reports.plugin.version>
         <release.plugin.version>2.5.3</release.plugin.version>
         <remote.resources.plugin.version>1.5</remote.resources.plugin.version>
+        <replacer.plugin.version>1.5.3</replacer.plugin.version>
         <resources.plugin.version>3.0.1</resources.plugin.version>
         <site.plugin.version>3.5.1</site.plugin.version>
         <sortpom.plugin.version>2.5.0</sortpom.plugin.version>
@@ -148,6 +149,11 @@
                     <groupId>com.github.github</groupId>
                     <artifactId>site-maven-plugin</artifactId>
                     <version>${github.site.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.google.code.maven-replacer-plugin</groupId>
+                    <artifactId>replacer</artifactId>
+                    <version>${replacer.plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>com.mycila</groupId>
