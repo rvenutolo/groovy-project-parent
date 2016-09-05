@@ -332,7 +332,7 @@
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <useReleaseProfile>false</useReleaseProfile>
                     <releaseProfiles>release</releaseProfiles>
-                    <goals>deploy site-deploy</goals>
+                    <goals>deploy</goals>
                 </configuration>
             </plugin>
             <plugin>
