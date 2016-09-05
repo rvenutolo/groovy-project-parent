@@ -176,8 +176,6 @@
                     <version>${antrun.plugin.version}</version>
                 </plugin>
                 <plugin>
-                    <!-- Using this instead of groovydoc-maven-plugin because
-                    I prefer the groovydoc output by gplus (mostly links config). -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
                     <version>${assembly.plugin.version}</version>
