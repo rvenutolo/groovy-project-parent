@@ -94,6 +94,27 @@
                     </executions>
                 </plugin>
                 <plugin>
+                    <groupId>com.google.code.maven-replacer-plugin</groupId>
+                    <artifactId>replacer</artifactId>
+                    <executions>
+                        <execution>
+                            <id>site-index-replace</id>
+                            <goals>
+                                <goal>replace</goal>
+                            </goals>
+                            <phase>pre-site</phase>
+                            <configuration>
+                                <file>${project.basedir}/src/site/markdown/index.md</file>
+                                <regexFlags>
+                                    <regexFlag>CASE_INSENSITIVE</regexFlag>
+                                    <regexFlag>DOTALL</regexFlag>
+                                </regexFlags>
+                                <token>&lt;!--\s*START_REMOVE_FOR_SITE\s*--&gt;.*&lt;!--\s*END_REMOVE_FOR_SITE\s*--&gt;</token>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
                     <configuration>
