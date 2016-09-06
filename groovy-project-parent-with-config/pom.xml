@@ -78,6 +78,7 @@
                     <artifactId>site-maven-plugin</artifactId>
                     <configuration>
                         <!-- NOTE: oauth2token must have public_repo and user:email scopes -->
+                        <server>github</server>
                         <message>creating maven site for ${project.version}</message>
                         <path>${github.site.path}</path>
                         <!-- don't overwrite non maven site stuff in repo -->
