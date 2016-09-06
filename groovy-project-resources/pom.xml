@@ -40,9 +40,11 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <id>bundle-resources</id>
                         <goals>
                             <goal>bundle</goal>
                         </goals>
+                        <phase>generate-resources</phase>
                     </execution>
                 </executions>
             </plugin>

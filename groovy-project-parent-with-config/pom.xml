@@ -61,7 +61,7 @@
                         <execution>
                             <!-- This copies the README.md file to the site dir and
                             renames it to index.md for site generation. -->
-                            <id>copy-readme-to-index</id>
+                            <id>copy-readme-to-site-index</id>
                             <goals>
                                 <goal>copy</goal>
                             </goals>
@@ -85,7 +85,7 @@
                     </configuration>
                     <executions>
                         <execution>
-                            <id>github-site</id>
+                            <id>github-site-deploy</id>
                             <goals>
                                 <goal>site</goal>
                             </goals>
@@ -215,7 +215,7 @@
                     </configuration>
                     <executions>
                         <execution>
-                            <id>enforce</id>
+                            <id>enforce-rules</id>
                             <goals>
                                 <goal>enforce</goal>
                             </goals>
@@ -236,24 +236,30 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-remote-resources-plugin</artifactId>
-                    <configuration>
-                        <resourceBundles>
-                            <resourceBundle>org.venutolo:groovy-project-resources:${groovy.project.resources.version}</resourceBundle>
-                        </resourceBundles>
-                    </configuration>
                     <executions>
                         <execution>
-                            <id>generate-resources-process</id>
+                            <id>get-project-resources</id>
                             <goals>
                                 <goal>process</goal>
                             </goals>
+                            <phase>generate-resources</phase>
+                            <configuration>
+                                <resourceBundles>
+                                    <resourceBundle>org.venutolo:groovy-project-resources:${groovy.project.resources.version}</resourceBundle>
+                                </resourceBundles>
+                            </configuration>
                         </execution>
                         <execution>
-                            <id>pre-site-process</id>
+                            <id>get-site-resources</id>
                             <goals>
                                 <goal>process</goal>
                             </goals>
                             <phase>pre-site</phase>
+                            <configuration>
+                                <resourceBundles>
+                                    <resourceBundle>org.venutolo:groovy-project-resources:${groovy.project.resources.version}</resourceBundle>
+                                </resourceBundles>
+                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
@@ -329,6 +335,7 @@
                                 <goal>compile</goal>
                                 <goal>testCompile</goal>
                             </goals>
+                            <phase>compile</phase>
                         </execution>
                         <execution>
                             <id>package-groovydoc</id>
@@ -386,7 +393,7 @@
                     </configuration>
                     <executions>
                         <execution>
-                            <id>codenarc</id>
+                            <id>codenarc-check</id>
                             <goals>
                                 <goal>codenarc</goal>
                             </goals>
