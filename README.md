@@ -33,3 +33,11 @@ A project containing a few POMs intended as parent POMs for my Groovy projects, 
  * [CodeNarc](http://codenarc.sourceforge.net/) configuration files.
  * [License Maven Plugin](http://code.mycila.com/license-maven-plugin/) header template.
  * [Maven Site Plugin](https://maven.apache.org/plugins/maven-site-plugin/) site descriptor.
+
+---
+ 
+### Make Release
+
+```bash
+./mvnw "-Darguments=-Dassembly.skipAssembly -Dmaven.source.skip" -B release:clean release:prepare release:perform
+```
