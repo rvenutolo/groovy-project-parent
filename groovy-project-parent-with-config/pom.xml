@@ -120,7 +120,7 @@
                                     <regexFlag>CASE_INSENSITIVE</regexFlag>
                                     <regexFlag>DOTALL</regexFlag>
                                 </regexFlags>
-                                <token>&lt;!--\s*START_REMOVE_FOR_SITE\s*--&gt;.*&lt;!--\s*END_REMOVE_FOR_SITE\s*--&gt;</token>
+                                <token>&lt;!--\s*START_REMOVE_FOR_SITE\s*--&gt;.*?&lt;!--\s*END_REMOVE_FOR_SITE\s*--&gt;</token>
                             </configuration>
                         </execution>
                     </executions>
