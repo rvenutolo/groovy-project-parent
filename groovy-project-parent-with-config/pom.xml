@@ -31,6 +31,16 @@
         <url>https://github.com/rvenutolo/groovy-project-parent</url>
     </scm>
 
+    <properties>
+        <groovy.project.resources.version>${project.parent.version}</groovy.project.resources.version>
+        <animal.sniffer.signature.groupId>org.codehaus.mojo.signature</animal.sniffer.signature.groupId>
+        <animal.sniffer.signature.artifactId>java16</animal.sniffer.signature.artifactId>
+        <animal.sniffer.signature.version>1.1</animal.sniffer.signature.version>
+        <java.minimum.version>1.6</java.minimum.version>
+        <github.site.path>snapshot</github.site.path>
+        <license.owner>Rick Venutolo</license.owner>
+    </properties>
+
     <dependencies>
         <dependency>
             <!-- needed for groovydoc -->
