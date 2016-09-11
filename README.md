@@ -41,3 +41,16 @@ A project containing a few POMs intended as parent POMs for my Groovy projects, 
 ```bash
 ./mvnw "-Darguments=-Dassembly.skipAssembly -Dmaven.source.skip" -B release:clean release:prepare release:perform
 ```
+
+### Update Maven Wrapper
+
+Use Maven Wrapper plugin
+```bash
+mvn -N io.takari:maven:wrapper -Dmaven=3.3.9
+```
+
+Download latest scripts
+```bash
+wget https://raw.githubusercontent.com/takari/maven-wrapper/master/mvnw
+wget https://raw.githubusercontent.com/takari/maven-wrapper/master/mvnw.cmd
+```
