@@ -107,7 +107,7 @@
         <groovy.version>2.4.7</groovy.version>
         <spock.version>1.0-groovy-2.4</spock.version>
         <!-- my properties -->
-        <groovy.project.resources.version>1.0.1</groovy.project.resources.version>
+        <groovy.project.resources.version>${project.version}</groovy.project.resources.version>
         <animal.sniffer.signature.groupId>org.codehaus.mojo.signature</animal.sniffer.signature.groupId>
         <animal.sniffer.signature.artifactId>java16</animal.sniffer.signature.artifactId>
         <animal.sniffer.signature.version>1.1</animal.sniffer.signature.version>
