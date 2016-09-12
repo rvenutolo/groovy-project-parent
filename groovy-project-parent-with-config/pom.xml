@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.venutolo</groupId>
         <artifactId>groovy-project-parent</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>groovy-project-parent-with-config</artifactId>
@@ -28,7 +28,7 @@
     <scm>
         <connection>scm:git:git@github.com:rvenutolo/groovy-project-parent.git</connection>
         <developerConnection>scm:git:git@github.com:rvenutolo/groovy-project-parent.git</developerConnection>
-        <tag>groovy-project-parent-1.0.0</tag>
+        <tag>HEAD</tag>
         <url>https://github.com/rvenutolo/groovy-project-parent</url>
     </scm>
 
@@ -194,11 +194,11 @@
                     <configuration>
                         <rules>
                             <!-- standard enforcer rules -->
-                            <banDistributionManagement></banDistributionManagement>
+                            <banDistributionManagement />
                             <dependencyConvergence>
                                 <uniqueVersions>false</uniqueVersions>
                             </dependencyConvergence>
-                            <reactorModuleConvergence></reactorModuleConvergence>
+                            <reactorModuleConvergence />
                             <requireJavaVersion>
                                 <!-- groovy 2.4.0+ requires 1.6+ -->
                                 <version>[${java.minimum.version},)</version>
@@ -206,13 +206,13 @@
                             <requireMavenVersion>
                                 <version>[${maven.minimum.version},)</version>
                             </requireMavenVersion>
-                            <requirePluginVersions></requirePluginVersions>
+                            <requirePluginVersions />
                             <requirePrerequisite>
                                 <mavenVersion>[${maven.minimum.version},)</mavenVersion>
                             </requirePrerequisite>
                             <!-- extra enforcer rules -->
-                            <banCircularDependencies></banCircularDependencies>
-                            <banDuplicateClasses></banDuplicateClasses>
+                            <banCircularDependencies />
+                            <banDuplicateClasses />
                         </rules>
                     </configuration>
                     <executions>
@@ -428,9 +428,9 @@
                             <artifactId>maven-enforcer-plugin</artifactId>
                             <configuration>
                                 <rules>
-                                    <requireNoRepositories></requireNoRepositories>
-                                    <requireReleaseDeps></requireReleaseDeps>
-                                    <requireReleaseVersion></requireReleaseVersion>
+                                    <requireNoRepositories />
+                                    <requireReleaseDeps />
+                                    <requireReleaseVersion />
                                 </rules>
                             </configuration>
                         </plugin>
