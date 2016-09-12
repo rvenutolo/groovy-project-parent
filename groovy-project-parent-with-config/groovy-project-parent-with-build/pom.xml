@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.venutolo</groupId>
         <artifactId>groovy-project-parent-with-config</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
+        <version>1.0.2</version>
     </parent>
 
     <artifactId>groovy-project-parent-with-build</artifactId>
@@ -24,7 +24,7 @@
     <scm>
         <connection>scm:git:git@github.com:rvenutolo/groovy-project-parent.git</connection>
         <developerConnection>scm:git:git@github.com:rvenutolo/groovy-project-parent.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>groovy-project-parent-1.0.2</tag>
         <url>https://github.com/rvenutolo/groovy-project-parent</url>
     </scm>
 
