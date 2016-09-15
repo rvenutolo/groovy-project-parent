@@ -204,11 +204,11 @@
                     <configuration>
                         <rules>
                             <!-- standard enforcer rules -->
-                            <banDistributionManagement />
+                            <banDistributionManagement></banDistributionManagement>
                             <dependencyConvergence>
                                 <uniqueVersions>false</uniqueVersions>
                             </dependencyConvergence>
-                            <reactorModuleConvergence />
+                            <reactorModuleConvergence></reactorModuleConvergence>
                             <requireJavaVersion>
                                 <!-- groovy 2.4.0+ requires 1.6+ -->
                                 <version>[${java.minimum.version},)</version>
@@ -216,13 +216,13 @@
                             <requireMavenVersion>
                                 <version>[${maven.minimum.version},)</version>
                             </requireMavenVersion>
-                            <requirePluginVersions />
+                            <requirePluginVersions></requirePluginVersions>
                             <requirePrerequisite>
                                 <mavenVersion>[${maven.minimum.version},)</mavenVersion>
                             </requirePrerequisite>
                             <!-- extra enforcer rules -->
-                            <banCircularDependencies />
-                            <banDuplicateClasses />
+                            <banCircularDependencies></banCircularDependencies>
+                            <banDuplicateClasses></banDuplicateClasses>
                         </rules>
                     </configuration>
                     <executions>
@@ -441,9 +441,9 @@
                             <artifactId>maven-enforcer-plugin</artifactId>
                             <configuration>
                                 <rules>
-                                    <requireNoRepositories />
-                                    <requireReleaseDeps />
-                                    <requireReleaseVersion />
+                                    <requireNoRepositories></requireNoRepositories>
+                                    <requireReleaseDeps></requireReleaseDeps>
+                                    <requireReleaseVersion></requireReleaseVersion>
                                 </rules>
                             </configuration>
                         </plugin>
