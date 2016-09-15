@@ -429,6 +429,9 @@
     <profiles>
         <profile>
             <id>release</id>
+            <properties>
+                <github.site.path>${project.version}</github.site.path>
+            </properties>
             <build>
                 <pluginManagement>
                     <plugins>
