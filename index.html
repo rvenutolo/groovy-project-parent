@@ -35,13 +35,17 @@
 <a id="groovy-project-parent" class="anchor" href="#groovy-project-parent" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>groovy-project-parent</h1>
 
 <p><a href="https://travis-ci.org/rvenutolo/groovy-project-parent"><img src="https://travis-ci.org/rvenutolo/groovy-project-parent.svg?branch=master" alt="Build Status"></a>
-<a href="https://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/hexpm/l/plug.svg" alt="License"></a></p>
+<a href="https://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/hexpm/l/plug.svg" alt="License"></a>
+<a href="https://github.com/rvenutolo/groovy-project-parent/releases"><img src="https://img.shields.io/github/release/venutolo/groovy-project-parent.svg" alt="GitHub release"></a></p>
 
 <p>A project containing a few POMs intended as parent POMs for my Groovy projects, plus a resources bundle.</p>
 
 <h2>
-<a id="groovy-project-parent-" class="anchor" href="#groovy-project-parent-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://github.com/rvenutolo/groovy-project-parent/blob/master/pom.xml">groovy-project-parent</a> <a href="https://www.versioneye.com/user/projects/57c33b3712b526000ed5f3be"><img src="https://www.versioneye.com/user/projects/57c33b3712b526000ed5f3be/badge.svg" alt="Dependency Status"></a>
+<a id="groovy-project-parent-1" class="anchor" href="#groovy-project-parent-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://github.com/rvenutolo/groovy-project-parent/blob/master/pom.xml">groovy-project-parent</a>
 </h2>
+
+<p><a href="https://maven-badges.herokuapp.com/maven-central/org.venutolo/groovy-project-parent"><img src="https://maven-badges.herokuapp.com/maven-central/org.venutolo/groovy-project-parent/badge.svg" alt="Maven Central"></a>
+<a href="https://www.versioneye.com/user/projects/57c33b3712b526000ed5f3be"><img src="https://www.versioneye.com/user/projects/57c33b3712b526000ed5f3be/badge.svg" alt="Dependency Status"></a></p>
 
 <ul>
 <li>Top-level parent POM.</li>
@@ -51,9 +55,18 @@
 <li>Has one configured build plugin, <a href="https://github.com/Ekryd/sortpom"><code>sortpom-maven-plugin</code></a>, to sort this POM and all inheriting POMs.</li>
 </ul>
 
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">parent</span>&gt;
+    &lt;<span class="pl-ent">groupId</span>&gt;org.venutolo&lt;/<span class="pl-ent">groupId</span>&gt;
+    &lt;<span class="pl-ent">artifactId</span>&gt;groovy-project-parent&lt;/<span class="pl-ent">artifactId</span>&gt;
+    &lt;<span class="pl-ent">version</span>&gt;1.1.0&lt;/<span class="pl-ent">version</span>&gt;
+&lt;/<span class="pl-ent">parent</span>&gt;</pre></div>
+
 <h2>
-<a id="groovy-project-parent-with-config-" class="anchor" href="#groovy-project-parent-with-config-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://github.com/rvenutolo/groovy-project-parent/blob/master/groovy-project-parent-with-config/pom.xml">groovy-project-parent-with-config</a> <a href="https://www.versioneye.com/user/projects/57c33bcb86473900106adabe"><img src="https://www.versioneye.com/user/projects/57c33bcb86473900106adabe/badge.svg" alt="Dependency Status"></a>
+<a id="groovy-project-parent-with-config" class="anchor" href="#groovy-project-parent-with-config" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://github.com/rvenutolo/groovy-project-parent/blob/master/groovy-project-parent-with-config/pom.xml">groovy-project-parent-with-config</a>
 </h2>
+
+<p><a href="https://maven-badges.herokuapp.com/maven-central/org.venutolo/groovy-project-parent-with-config"><img src="https://maven-badges.herokuapp.com/maven-central/org.venutolo/groovy-project-parent-with-config/badge.svg" alt="Maven Central"></a>
+<a href="https://www.versioneye.com/user/projects/57c33bcb86473900106adabe"><img src="https://www.versioneye.com/user/projects/57c33bcb86473900106adabe/badge.svg" alt="Dependency Status"></a></p>
 
 <ul>
 <li>Child of <code>groovy-project-parent</code>.</li>
@@ -61,9 +74,18 @@
 <li>Does <em>not</em> define any further build plugins.</li>
 </ul>
 
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">parent</span>&gt;
+    &lt;<span class="pl-ent">groupId</span>&gt;org.venutolo&lt;/<span class="pl-ent">groupId</span>&gt;
+    &lt;<span class="pl-ent">artifactId</span>&gt;groovy-project-parent-with-config&lt;/<span class="pl-ent">artifactId</span>&gt;
+    &lt;<span class="pl-ent">version</span>&gt;1.1.0&lt;/<span class="pl-ent">version</span>&gt;
+&lt;/<span class="pl-ent">parent</span>&gt;</pre></div>
+
 <h2>
-<a id="groovy-project-parent-with-build-" class="anchor" href="#groovy-project-parent-with-build-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://github.com/rvenutolo/groovy-project-parent/blob/master/groovy-project-parent-with-config/groovy-project-parent-with-build/pom.xml">groovy-project-parent-with-build</a> <a href="https://www.versioneye.com/user/projects/57c33bd7864739000ec94b20"><img src="https://www.versioneye.com/user/projects/57c33bd7864739000ec94b20/badge.svg" alt="Dependency Status"></a>
+<a id="groovy-project-parent-with-build" class="anchor" href="#groovy-project-parent-with-build" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://github.com/rvenutolo/groovy-project-parent/blob/master/groovy-project-parent-with-config/groovy-project-parent-with-build/pom.xml">groovy-project-parent-with-build</a>
 </h2>
+
+<p><a href="https://maven-badges.herokuapp.com/maven-central/org.venutolo/groovy-project-parent-with-build"><img src="https://maven-badges.herokuapp.com/maven-central/org.venutolo/groovy-project-parent-with-build/badge.svg" alt="Maven Central"></a>
+<a href="https://www.versioneye.com/user/projects/57c33bd7864739000ec94b20"><img src="https://www.versioneye.com/user/projects/57c33bd7864739000ec94b20/badge.svg" alt="Dependency Status"></a></p>
 
 <ul>
 <li>Child of <code>groovy-project-parent-with-config</code>.</li>
@@ -72,13 +94,23 @@
 <li>Provides a default <code>release</code> profile that adds GPG artifact signing and deploying to OSSRH to the build.</li>
 </ul>
 
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">parent</span>&gt;
+    &lt;<span class="pl-ent">groupId</span>&gt;org.venutolo&lt;/<span class="pl-ent">groupId</span>&gt;
+    &lt;<span class="pl-ent">artifactId</span>&gt;groovy-project-parent-with-build&lt;/<span class="pl-ent">artifactId</span>&gt;
+    &lt;<span class="pl-ent">version</span>&gt;1.1.0&lt;/<span class="pl-ent">version</span>&gt;
+&lt;/<span class="pl-ent">parent</span>&gt;</pre></div>
+
 <h2>
-<a id="groovy-project-resources-" class="anchor" href="#groovy-project-resources-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://github.com/rvenutolo/groovy-project-parent/blob/master/groovy-project-resources/src/main/resources">groovy-project-resources</a> <a href="https://www.versioneye.com/user/projects/57c33b6a8647390016589744"><img src="https://www.versioneye.com/user/projects/57c33b6a8647390016589744/badge.svg" alt="Dependency Status"></a>
+<a id="groovy-project-resources" class="anchor" href="#groovy-project-resources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://github.com/rvenutolo/groovy-project-parent/blob/master/groovy-project-resources/src/main/resources">groovy-project-resources</a>
 </h2>
+
+<p><a href="https://maven-badges.herokuapp.com/maven-central/org.venutolo/groovy-project-resources"><img src="https://maven-badges.herokuapp.com/maven-central/org.venutolo/groovy-project-resources/badge.svg" alt="Maven Central"></a>
+<a href="https://www.versioneye.com/user/projects/57c33b6a8647390016589744"><img src="https://www.versioneye.com/user/projects/57c33b6a8647390016589744/badge.svg" alt="Dependency Status"></a></p>
 
 <ul>
 <li>Child of <code>groovy-project-parent</code>.</li>
-<li>Provides a resource bundle to be used in other projects via the <a href="https://maven.apache.org/plugins/maven-remote-resources-plugin/"><code>maven-remote-resources-plugin</code></a> plugin. This includes:
+<li>
+<p>Provides a resource bundle to be used in other projects via the <a href="https://maven.apache.org/plugins/maven-remote-resources-plugin/"><code>maven-remote-resources-plugin</code></a> plugin. This includes:</p>
 
 <ul>
 <li>
@@ -90,8 +122,58 @@
 <li>
 <a href="https://maven.apache.org/plugins/maven-site-plugin/">Maven Site Plugin</a> site descriptor.</li>
 </ul>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">plugin</span>&gt;
+   &lt;<span class="pl-ent">groupId</span>&gt;org.apache.maven.plugins&lt;/<span class="pl-ent">groupId</span>&gt;
+   &lt;<span class="pl-ent">artifactId</span>&gt;maven-remote-resources-plugin&lt;/<span class="pl-ent">artifactId</span>&gt;
+   &lt;<span class="pl-ent">executions</span>&gt;
+       &lt;<span class="pl-ent">execution</span>&gt;
+           &lt;<span class="pl-ent">id</span>&gt;get-project-resources&lt;/<span class="pl-ent">id</span>&gt;
+           &lt;<span class="pl-ent">goals</span>&gt;
+               &lt;<span class="pl-ent">goal</span>&gt;process&lt;/<span class="pl-ent">goal</span>&gt;
+           &lt;/<span class="pl-ent">goals</span>&gt;
+           &lt;<span class="pl-ent">phase</span>&gt;generate-resources&lt;/<span class="pl-ent">phase</span>&gt;
+           &lt;<span class="pl-ent">configuration</span>&gt;
+               &lt;<span class="pl-ent">resourceBundles</span>&gt;
+                   &lt;<span class="pl-ent">resourceBundle</span>&gt;org.venutolo:groovy-project-resources:${groovy.project.resources.version}&lt;/<span class="pl-ent">resourceBundle</span>&gt;
+               &lt;/<span class="pl-ent">resourceBundles</span>&gt;
+           &lt;/<span class="pl-ent">configuration</span>&gt;
+       &lt;/<span class="pl-ent">execution</span>&gt;
+       &lt;<span class="pl-ent">execution</span>&gt;
+           &lt;<span class="pl-ent">id</span>&gt;get-site-resources&lt;/<span class="pl-ent">id</span>&gt;
+           &lt;<span class="pl-ent">goals</span>&gt;
+               &lt;<span class="pl-ent">goal</span>&gt;process&lt;/<span class="pl-ent">goal</span>&gt;
+           &lt;/<span class="pl-ent">goals</span>&gt;
+           &lt;<span class="pl-ent">phase</span>&gt;pre-site&lt;/<span class="pl-ent">phase</span>&gt;
+           &lt;<span class="pl-ent">configuration</span>&gt;
+               &lt;<span class="pl-ent">resourceBundles</span>&gt;
+                   &lt;<span class="pl-ent">resourceBundle</span>&gt;org.venutolo:groovy-project-resources:${groovy.project.resources.version}&lt;/<span class="pl-ent">resourceBundle</span>&gt;
+               &lt;/<span class="pl-ent">resourceBundles</span>&gt;
+           &lt;/<span class="pl-ent">configuration</span>&gt;
+       &lt;/<span class="pl-ent">execution</span>&gt;
+   &lt;/<span class="pl-ent">executions</span>&gt;
+&lt;/<span class="pl-ent">plugin</span>&gt;</pre></div>
 </li>
 </ul>
+
+<hr>
+
+<h3>
+<a id="make-release" class="anchor" href="#make-release" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Make Release</h3>
+
+<div class="highlight highlight-source-shell"><pre>./mvnw <span class="pl-s"><span class="pl-pds">"</span>-Darguments=-Dassembly.skipAssembly -Dmaven.source.skip<span class="pl-pds">"</span></span> -B release:clean release:prepare release:perform</pre></div>
+
+<h3>
+<a id="update-maven-wrapper" class="anchor" href="#update-maven-wrapper" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Update Maven Wrapper</h3>
+
+<p>Use Maven Wrapper plugin</p>
+
+<div class="highlight highlight-source-shell"><pre>mvn -N io.takari:maven:wrapper -Dmaven=3.3.9</pre></div>
+
+<p>Download latest scripts</p>
+
+<div class="highlight highlight-source-shell"><pre>wget https://raw.githubusercontent.com/takari/maven-wrapper/master/mvnw
+wget https://raw.githubusercontent.com/takari/maven-wrapper/master/mvnw.cmd</pre></div>
       </section>
     </div>
 
