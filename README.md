@@ -4,7 +4,9 @@
 
 A project containing a few POMs intended as parent POMs for my Groovy projects, plus a resources bundle.
 
-## [groovy-project-parent](https://github.com/rvenutolo/groovy-project-parent/blob/master/pom.xml) [![Dependency Status](https://www.versioneye.com/user/projects/57c33b3712b526000ed5f3be/badge.svg)](https://www.versioneye.com/user/projects/57c33b3712b526000ed5f3be)
+## [groovy-project-parent](https://github.com/rvenutolo/groovy-project-parent/blob/master/pom.xml) 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.venutolo/groovy-project-parent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.venutolo/groovy-project-parent)
+[![Dependency Status](https://www.versioneye.com/user/projects/57c33b3712b526000ed5f3be/badge.svg)](https://www.versioneye.com/user/projects/57c33b3712b526000ed5f3be)
 
 * Top-level parent POM.
 * Provides a number of properties that define plugin versions, Groovy and Spock versions, and some other configuration values.
@@ -20,7 +22,9 @@ A project containing a few POMs intended as parent POMs for my Groovy projects, 
 </parent>
 ```
 
-## [groovy-project-parent-with-config](https://github.com/rvenutolo/groovy-project-parent/blob/master/groovy-project-parent-with-config/pom.xml) [![Dependency Status](https://www.versioneye.com/user/projects/57c33bcb86473900106adabe/badge.svg)](https://www.versioneye.com/user/projects/57c33bcb86473900106adabe)
+## [groovy-project-parent-with-config](https://github.com/rvenutolo/groovy-project-parent/blob/master/groovy-project-parent-with-config/pom.xml) 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.venutolo/groovy-project-parent-with-config/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.venutolo/groovy-project-parent-with-config)
+[![Dependency Status](https://www.versioneye.com/user/projects/57c33bcb86473900106adabe/badge.svg)](https://www.versioneye.com/user/projects/57c33bcb86473900106adabe)
 
 * Child of `groovy-project-parent`.
 * Provides default configurations for the plugins defined the parent POM's `pluginManagement` section.
@@ -34,7 +38,9 @@ A project containing a few POMs intended as parent POMs for my Groovy projects, 
 </parent>
 ```
 
-## [groovy-project-parent-with-build](https://github.com/rvenutolo/groovy-project-parent/blob/master/groovy-project-parent-with-config/groovy-project-parent-with-build/pom.xml) [![Dependency Status](https://www.versioneye.com/user/projects/57c33bd7864739000ec94b20/badge.svg)](https://www.versioneye.com/user/projects/57c33bd7864739000ec94b20)
+## [groovy-project-parent-with-build](https://github.com/rvenutolo/groovy-project-parent/blob/master/groovy-project-parent-with-config/groovy-project-parent-with-build/pom.xml)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.venutolo/groovy-project-parent-with-build/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.venutolo/groovy-project-parent-with-build)
+[![Dependency Status](https://www.versioneye.com/user/projects/57c33bd7864739000ec94b20/badge.svg)](https://www.versioneye.com/user/projects/57c33bd7864739000ec94b20)
 
 
 * Child of `groovy-project-parent-with-config`.
@@ -50,7 +56,9 @@ A project containing a few POMs intended as parent POMs for my Groovy projects, 
 </parent>
 ```
 
-## [groovy-project-resources](https://github.com/rvenutolo/groovy-project-parent/blob/master/groovy-project-resources/src/main/resources) [![Dependency Status](https://www.versioneye.com/user/projects/57c33b6a8647390016589744/badge.svg)](https://www.versioneye.com/user/projects/57c33b6a8647390016589744)
+## [groovy-project-resources](https://github.com/rvenutolo/groovy-project-parent/blob/master/groovy-project-resources/src/main/resources)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.venutolo/groovy-project-resources/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.venutolo/groovy-project-resources)
+[![Dependency Status](https://www.versioneye.com/user/projects/57c33b6a8647390016589744/badge.svg)](https://www.versioneye.com/user/projects/57c33b6a8647390016589744)
 
 * Child of `groovy-project-parent`.
 * Provides a resource bundle to be used in other projects via the [`maven-remote-resources-plugin`](https://maven.apache.org/plugins/maven-remote-resources-plugin/) plugin. This includes:
