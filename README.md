@@ -1,5 +1,6 @@
 # groovy-project-parent
 [![Build Status](https://travis-ci.org/rvenutolo/groovy-project-parent.svg?branch=master)](https://travis-ci.org/rvenutolo/groovy-project-parent)
+[![Quality Gate](https://sonarqube.com/api/badges/gate?key=org.venutolo:groovy-project-parent)](https://sonarqube.com/dashboard/index/org.venutolo:groovy-project-parent)
 [![License](https://img.shields.io/hexpm/l/plug.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![GitHub release](https://img.shields.io/github/release/rvenutolo/groovy-project-parent.svg)](https://github.com/rvenutolo/groovy-project-parent/releases)
 
