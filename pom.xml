@@ -77,7 +77,7 @@
         <clean.plugin.version>3.0.0</clean.plugin.version>
         <cobertura.plugin.version>2.7</cobertura.plugin.version>
         <codenarc.plugin.version>0.22-1</codenarc.plugin.version>
-        <codenarc.version>0.25.2</codenarc.version>
+        <codenarc.version>0.26.0</codenarc.version>
         <compiler.plugin.version>3.5.1</compiler.plugin.version>
         <copy.rename.plugin.version>1.0.1</copy.rename.plugin.version>
         <dependency.plugin.version>2.10</dependency.plugin.version>
