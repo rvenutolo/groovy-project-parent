@@ -105,7 +105,7 @@
         <versioneye.plugin.version>3.11.0</versioneye.plugin.version>
         <versions.plugin.version>2.3</versions.plugin.version>
         <!-- dependency versions -->
-        <groovy.version>2.4.7</groovy.version>
+        <groovy.version>2.4.8</groovy.version>
         <spock.version>1.0-groovy-2.4</spock.version>
     </properties>
 
