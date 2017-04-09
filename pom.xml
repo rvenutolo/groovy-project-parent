@@ -29,10 +29,6 @@
         </developer>
     </developers>
 
-    <prerequisites>
-        <maven>${maven.minimum.version}</maven>
-    </prerequisites>
-
     <modules>
         <module>groovy-project-resources</module>
         <module>groovy-project-parent-with-config</module>
