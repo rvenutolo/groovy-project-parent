@@ -213,9 +213,6 @@
                                 <version>[${maven.minimum.version},)</version>
                             </requireMavenVersion>
                             <requirePluginVersions></requirePluginVersions>
-                            <requirePrerequisite>
-                                <mavenVersion>[${maven.minimum.version},)</mavenVersion>
-                            </requirePrerequisite>
                             <!-- extra enforcer rules -->
                             <banCircularDependencies></banCircularDependencies>
                             <banDuplicateClasses></banDuplicateClasses>
