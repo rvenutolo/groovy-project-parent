@@ -114,7 +114,7 @@ A project containing a few POMs intended as parent POMs for my Groovy projects, 
 
 Use Maven Wrapper plugin
 ```bash
-mvn -N io.takari:maven:wrapper -Dmaven=3.3.9
+mvn -N io.takari:maven:wrapper -Dmaven=3.5.0
 ```
 
 Download latest scripts
