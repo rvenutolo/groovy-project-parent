@@ -53,6 +53,7 @@
                 <plugin>
                     <groupId>com.coderplus.maven.plugins</groupId>
                     <artifactId>copy-rename-maven-plugin</artifactId>
+                    <version>${copy.rename.plugin.version}</version>
                     <executions>
                         <execution>
                             <!-- This copies the site.xml file to the site dir. -->
@@ -84,6 +85,7 @@
                 <plugin>
                     <groupId>com.github.github</groupId>
                     <artifactId>site-maven-plugin</artifactId>
+                    <version>${github.site.plugin.version}</version>
                     <configuration>
                         <!-- NOTE: oauth2token must have public_repo and user:email scopes -->
                         <server>github</server>
@@ -105,6 +107,7 @@
                 <plugin>
                     <groupId>com.google.code.maven-replacer-plugin</groupId>
                     <artifactId>replacer</artifactId>
+                    <version>${replacer.plugin.version}</version>
                     <executions>
                         <execution>
                             <id>site-index-replace</id>
@@ -126,6 +129,7 @@
                 <plugin>
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
+                    <version>${license.plugin.version}</version>
                     <configuration>
                         <header>${project.build.directory}/maven-shared-archive-resources/license/license-header-template.txt</header>
                         <mapping>
@@ -160,6 +164,7 @@
                     I prefer the groovydoc output by gplus (mostly links config). -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${assembly.plugin.version}</version>
                     <executions>
                         <execution>
                             <id>attach-doc</id>
@@ -179,6 +184,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${dependency.plugin.version}</version>
                     <executions>
                         <execution>
                             <id>check-dependencies</id>
@@ -198,6 +204,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${enforcer.plugin.version}</version>
                     <configuration>
                         <rules>
                             <!-- standard enforcer rules -->
@@ -232,6 +239,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
+                    <version>${release.plugin.version}</version>
                     <configuration>
                         <autoVersionSubmodules>true</autoVersionSubmodules>
                         <useReleaseProfile>false</useReleaseProfile>
@@ -242,6 +250,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-remote-resources-plugin</artifactId>
+                    <version>${remote.resources.plugin.version}</version>
                     <executions>
                         <execution>
                             <id>get-project-resources</id>
@@ -272,6 +281,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
+                    <version>${site.plugin.version}</version>
                     <configuration>
                         <!-- disable site deployment as github site-maven-plugin will handle it
                         see: https://github.github.com/maven-plugins/site-plugin/phase.html -->
@@ -281,6 +291,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
+                    <version>${source.plugin.version}</version>
                     <executions>
                         <execution>
                             <id>attach-sources</id>
@@ -295,6 +306,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire.plugin.version}</version>
                     <configuration>
                         <includes>
                             <include>**/Test*.java</include>
@@ -308,6 +320,7 @@
                 <plugin>
                     <groupId>org.codehaus.gmavenplus</groupId>
                     <artifactId>gmavenplus-plugin</artifactId>
+                    <version>${gmavenplus.plugin.version}</version>
                     <configuration>
                         <!-- groovydoc titles/footer/header -->
                         <windowTitle>${project.groupId}:${project.artifactId}:${project.version}</windowTitle>
@@ -369,6 +382,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>animal-sniffer-maven-plugin</artifactId>
+                    <version>${animal.sniffer.plugin.version}</version>
                     <configuration>
                         <signature>
                             <groupId>${animal.sniffer.signature.groupId}</groupId>
@@ -389,6 +403,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>codenarc-maven-plugin</artifactId>
+                    <version>${codenarc.plugin.version}</version>
                     <configuration>
                         <codeNarcVersion>${codenarc.version}</codeNarcVersion>
                         <rulesetfiles>file:${project.build.directory}/maven-shared-archive-resources/codenarc/codenarc.groovy</rulesetfiles>
@@ -433,6 +448,7 @@
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-enforcer-plugin</artifactId>
+                            <version>${enforcer.plugin.version}</version>
                             <configuration>
                                 <rules>
                                     <requireNoRepositories></requireNoRepositories>
@@ -444,6 +460,7 @@
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-gpg-plugin</artifactId>
+                            <version>${gpg.plugin.version}</version>
                             <executions>
                                 <execution>
                                     <id>sign-artifacts</id>
@@ -457,6 +474,7 @@
                         <plugin>
                             <groupId>org.sonatype.plugins</groupId>
                             <artifactId>nexus-staging-maven-plugin</artifactId>
+                            <version>${nexus.staging.plugin.version}</version>
                             <extensions>true</extensions>
                             <configuration>
                                 <serverId>ossrh</serverId>
