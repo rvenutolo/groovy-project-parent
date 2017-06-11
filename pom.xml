@@ -98,7 +98,7 @@
         <surefire.plugin.version>2.20</surefire.plugin.version>
         <surefire.report.plugin.version>2.20</surefire.report.plugin.version>
         <versioneye.plugin.version>3.11.4</versioneye.plugin.version>
-        <versions.plugin.version>2.3</versions.plugin.version>
+        <versions.plugin.version>2.4</versions.plugin.version>
         <!-- dependency versions -->
         <groovy.version>2.4.11</groovy.version>
         <spock.version>1.1-groovy-2.4</spock.version>
