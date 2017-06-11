@@ -29,7 +29,7 @@ A project containing a few POMs intended as parent POMs for my Groovy projects, 
 [![Dependency Status](https://www.versioneye.com/user/projects/57c33bcb86473900106adabe/badge.svg)](https://www.versioneye.com/user/projects/57c33bcb86473900106adabe)
 
 * Child of `groovy-project-parent`.
-* Provides default configurations for the plugins defined the parent POM's `pluginManagement` section.
+* Provides default configurations for the plugins defined in the parent POM's `pluginManagement` section.
 * Does _not_ define any further build plugins.
 
 ```xml
