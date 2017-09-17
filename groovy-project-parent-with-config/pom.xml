@@ -341,7 +341,7 @@
                             </link>
                             <link>
                                 <packages>spock</packages>
-                                <href>http://spockframework.github.io/spock/javadoc/1.0/</href>
+                                <href>http://spockframework.github.io/spock/javadoc/1.1/</href>
                             </link>
                         </links>
                     </configuration>
