@@ -80,7 +80,7 @@
         <enforcer.plugin.version>1.4.1</enforcer.plugin.version>
         <extra.enforcer.rules.version>1.0-beta-6</extra.enforcer.rules.version>
         <github.site.plugin.version>0.12</github.site.plugin.version>
-        <gmavenplus.plugin.version>1.5</gmavenplus.plugin.version>
+        <gmavenplus.plugin.version>1.6</gmavenplus.plugin.version>
         <gpg.plugin.version>1.6</gpg.plugin.version>
         <install.plugin.version>2.5.2</install.plugin.version>
         <jar.plugin.version>3.0.2</jar.plugin.version>

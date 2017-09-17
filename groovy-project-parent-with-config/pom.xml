@@ -352,7 +352,7 @@
                                 <goal>addSources</goal>
                                 <goal>addTestSources</goal>
                                 <goal>compile</goal>
-                                <goal>testCompile</goal>
+                                <goal>compileTests</goal>
                             </goals>
                             <phase>compile</phase>
                         </execution>
@@ -360,7 +360,7 @@
                             <id>package-groovydoc</id>
                             <goals>
                                 <goal>groovydoc</goal>
-                                <goal>testGroovydoc</goal>
+                                <goal>groovydocTests</goal>
                             </goals>
                             <phase>prepare-package</phase>
                         </execution>
@@ -368,13 +368,13 @@
                             <id>site-groovydoc</id>
                             <goals>
                                 <goal>groovydoc</goal>
-                                <goal>testGroovydoc</goal>
+                                <goal>groovydocTests</goal>
                             </goals>
                             <phase>site</phase>
                             <configuration>
                                 <!-- set output directories to those used by javadoc plugin for site build -->
-                                <groovydocOutputDirectory>${project.reporting.outputDirectory}/apidocs</groovydocOutputDirectory>
-                                <testGroovydocOutputDirectory>${project.reporting.outputDirectory}/testapidocs</testGroovydocOutputDirectory>
+                                <groovyDocOutputDirectory>${project.reporting.outputDirectory}/apidocs</groovyDocOutputDirectory>
+                                <testGroovyDocOutputDirectory>${project.reporting.outputDirectory}/testapidocs</testGroovyDocOutputDirectory>
                             </configuration>
                         </execution>
                     </executions>
